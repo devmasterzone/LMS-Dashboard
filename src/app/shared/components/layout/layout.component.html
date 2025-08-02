@@ -1,0 +1,74 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav" [mode]="sideNavMode" [opened]="isSideNavOpened" fixedInViewport>
+        <div class="sidebar-header">
+            <mat-icon class="brand-icon">school</mat-icon>
+            <span class="brand-title"> Edu Dashboard</span>
+        </div>
+
+        <!-- sidebar.component.html -->
+        <mat-nav-list class="sidenav-menu-list">
+            <ng-container *ngFor="let item of menu">
+                <!-- Parent Link (with or without children) -->
+                <ng-container *ngIf="!item.children; else accordionItem">
+                    <a mat-list-item [routerLink]="item.route" class="single-menu-item">
+                        <mat-icon>{{ item.icon }}</mat-icon>
+                        <span>{{ item.title }}</span>
+                    </a>
+                </ng-container>
+
+                <!-- Accordion Item -->
+                <ng-template #accordionItem>
+                    <div class="accordion-item" (click)="toggleSubmenu(item.title)">
+                        <mat-list-item class="parent-menu-item">
+                            <div class="parent-menu-item-inner-wrapper">
+                                <div class="parent-menu-item-content">
+                                <mat-icon>{{ item.icon }}</mat-icon>
+                                <span>{{ item.title }}</span>
+                            </div>
+                            <mat-icon>
+                                {{ openSubmenu === item.title ? "expand_less" : "expand_more" }}
+                            </mat-icon>
+                            </div>
+                            
+                        </mat-list-item>
+                    </div>
+
+                    <div class="submenu" *ngIf="openSubmenu === item.title">
+                        <a mat-list-item *ngFor="let child of item.children" [routerLink]="child.route"
+                            class="submenu-item">
+                            {{ child.title }}
+                        </a>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content-wrapper">
+        <mat-toolbar color="primary" class="main-toolbar shadow">
+            <button mat-icon-button (click)="toggleSideNav()" class="toggle-sidebar">
+                <mat-icon>{{ isSideNavOpened ? "menu_open" : "menu" }}</mat-icon>
+            </button>
+
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+            <span class="spacer"></span>
+
+            <button mat-icon-button (click)="toggleTheme()" class="toggle-theme">
+                <mat-icon>{{ isDarkTheme ? "light_mode" : "dark_mode" }}</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
