@@ -1,0 +1,31 @@
+<table class="table align-middle">
+  <thead class="table-light">
+    <tr>
+      <th class="table-header-cell">Name</th>
+      <th class="table-header-cell">Status</th>
+      <th class="table-header-cell">Date</th>
+      <th class="table-header-cell">Amount</th>
+      <th class="table-header-cell">Transaction ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let person of data">
+      <td class="table-data-cell">{{ person.name }}</td>
+      <td>
+        <span
+          class="fw-normal badge"
+          [ngClass]="{
+            'bg-success': person.status === 'Paid',
+            'bg-danger': person.status === 'Unpaid',
+            'bg-warning': person.status === 'Pending'
+          }"
+        >
+          {{ person.status }}
+        </span>
+      </td>
+      <td class="table-data-cell">{{ person.date }}</td>
+      <td class="table-data-cell">{{ person.amount }}</td>
+      <td class="table-data-cell">#{{ person.transactionId }}</td>
+    </tr>
+  </tbody>
+</table>

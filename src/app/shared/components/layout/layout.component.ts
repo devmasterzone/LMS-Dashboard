@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -9,6 +9,10 @@ import {MatCardModule} from '@angular/material/card';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DashboardComponent } from '../../../module/dashboard/dashboard.component';
+import { BarChartComponent } from '../../../module/dashboard/charts/bar-chart/bar-chart.component';
+import { PieChartComponent } from '../../../module/dashboard/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from '../../../module/dashboard/charts/line-chart/line-chart.component';
 
 @Component({
   selector: 'app-layout',
@@ -26,6 +30,9 @@ export class LayoutComponent {
   isSideNavOpened = true;
   sideNavMode: 'side' | 'over' = 'side';
   openSubmenu: string | null = null; // ✅ Move this here
+  @ViewChild(BarChartComponent) chartComponent!: BarChartComponent;
+  @ViewChild(PieChartComponent) pieComponent!: PieChartComponent;
+  @ViewChild(LineChartComponent!) lineComponent!: LineChartComponent;
    menu: SidebarMenu[] = [
     {
       title: 'Dashboard Light',
@@ -84,6 +91,11 @@ export class LayoutComponent {
 
   toggleSideNav() {
     this.isSideNavOpened = !this.isSideNavOpened;
+     setTimeout(() => {
+    this.chartComponent?.resizeChart();
+    this.pieComponent?.resizeChart();
+    this.lineComponent?.resizeChart();
+  }, 500); // delay matches sidenav animation duration
   }
 
   toggleTheme() {
@@ -92,8 +104,10 @@ export class LayoutComponent {
   // Add or remove the dark theme class on <body>
   if (this.isDarkTheme) {
     document.body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
   } else {
     document.body.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
   }
 }
   

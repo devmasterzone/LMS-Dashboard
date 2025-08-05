@@ -1,0 +1,11 @@
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Professors">
+        <app-salary-table [data]="professors"></app-salary-table>
+    </mat-tab>
+    <mat-tab label="Librarian">
+        <app-salary-table [data]="librarians"></app-salary-table>
+    </mat-tab>
+    <mat-tab label="Other">
+        <app-salary-table [data]="others"></app-salary-table>
+    </mat-tab>
+</mat-tab-group>

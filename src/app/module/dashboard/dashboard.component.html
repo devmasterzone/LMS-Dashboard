@@ -1,102 +1,56 @@
 <div class="row">
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-primary shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div
-              class="text-xs font-weight-bold text-primary text-uppercase mb-1"
-            >
-              TOTAL STUDENTS
-            </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">4000</div>
-          </div>
-          <div class="col-auto">
-            <i class="fa-solid fa-users fa-2x text-gray-300"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-success shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div
-              class="text-xs font-weight-bold text-success text-uppercase mb-1"
-            >
-              NEW STUDENTS
-            </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">2150</div>
-          </div>
-          <div class="col-auto">
-            <i class="fa-solid fa-user-plus fa-2x text-gray-300"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-info shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-              TOTAL COURSE
-            </div>
-            <div class="row no-gutters align-items-center">
-              <div class="col-auto">
-                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                  28
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <i class="fa-solid fa-book-open fa-2x text-gray-300"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Pending Requests Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-warning shadow h-100 py-2">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div
-              class="text-xs font-weight-bold text-warning text-uppercase mb-1"
-            >
-              FEES COLLECTION
-            </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">$8918</div>
-          </div>
-          <div class="col-auto">
-            <i class="fa-solid fa-money-check-dollar fa-2x text-gray-300"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="col-xl-3 col-md-6 mb-4" *ngFor="let card of dashboardCards">
+    <app-dashboard-card
+      [title]="card.title"
+      [value]="card.value"
+      [icon]="card.icon"
+      [borderColor]="card.color"
+      [textColor]="card.color">
+    </app-dashboard-card>
   </div>
 </div>
 
-<div style="text-align:center">
-  <!-- <apx-chart
-  *ngIf="isBrowser"
-  [series]="chartOptions.series"
-  [chart]="chartOptions.chart"
-  [xaxis]="chartOptions.xaxis"
-  [title]="chartOptions.title"
-></apx-chart> -->
-
-
+<div class="row">
+  <div class="col-xl-6 col-lg-6" *ngFor="let chart of chartSections">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">{{ chart.title }}</h6>
+      </div>
+      <div class="card-body">
+        <div class="chart-area" style="width: 100%">
+          <ng-container *ngComponentOutlet="chart.component"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="false">
+    <app-bar-chart></app-bar-chart>
+    <app-pie-chart></app-pie-chart>
+  </ng-container>
 
 </div>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">Salary Status</h6>
+  </div>
+  <div class="card-body">
+    <app-salary-status
+      [professors]="professors"
+      [librarians]="librarians"
+      [others]="others">
+    </app-salary-status>
+
+  </div>
+</div>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+    <h6 class="m-0 font-weight-bold text-primary">University Survey</h6>
+  </div>
+  <div class="card-body">
+    <app-line-chart></app-line-chart>
+
+  </div>
+</div>
+
