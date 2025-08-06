@@ -1,0 +1,6 @@
+.mdc-tab__text-label{
+    color: var(--text-primary) !important;
+}
+.mdc-tab--active .mdc-tab__text-label{
+    color: var(--primary-dark) !important;
+}

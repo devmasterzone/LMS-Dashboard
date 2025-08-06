@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav class="sidenav" [mode]="sideNavMode" [opened]="isSideNavOpened" fixedInViewport>
+    <mat-sidenav #sidenav class="sidenav" [mode]="sideNavMode" [opened]="isSideNavOpened" fixedInViewport [ngClass]="{ 'sideNavOpened': isSideNavOpened, 'sideNavCosed': !isSideNavOpened }">
         <div class="sidebar-header">
             <mat-icon class="brand-icon">school</mat-icon>
             <span class="brand-title"> Edu Dashboard</span>
@@ -44,7 +44,7 @@
         </mat-nav-list>
     </mat-sidenav>
 
-    <mat-sidenav-content class="main-content-wrapper">
+    <mat-sidenav-content class="main-content-wrapper" [ngClass]="{ 'with-margin': isSideNavOpened, 'no-margin': !isSideNavOpened }"> 
         <mat-toolbar color="primary" class="main-toolbar shadow">
             <button mat-icon-button (click)="toggleSideNav()" class="toggle-sidebar">
                 <mat-icon>{{ isSideNavOpened ? "menu_open" : "menu" }}</mat-icon>

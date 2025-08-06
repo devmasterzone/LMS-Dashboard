@@ -1,7 +1,7 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { ChartComponent, NgApexchartsModule,ApexNonAxisChartSeries,ApexResponsive,
-   ApexChart, ApexFill, ApexDataLabels,ApexLegend,ApexPlotOptions } from 'ng-apexcharts';
+   ApexChart, ApexFill, ApexDataLabels,ApexLegend,ApexPlotOptions,ApexTooltip } from 'ng-apexcharts';
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -11,6 +11,7 @@ export type ChartOptions = {
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
    plotOptions: ApexPlotOptions;
+   tooltip?: ApexTooltip;
 };
 @Component({
   selector: 'app-pie-chart',
@@ -56,29 +57,35 @@ this.chartOptions = {
   legend: {
     show: true,
     position: "top",
+    
     formatter: function (val, opts) {
       return val + " - ₹" + opts.w.globals.series[opts.seriesIndex];
-    }
+    },
+    
   },
   plotOptions: {
     pie: {
       donut: {
         size: '50%',
+        
         labels: {
           show: true,
           name: {
             show: true,
             fontSize: '18px',
-            fontWeight: 600
+            fontWeight: 600,
+            color:'var(--text-primary)',
           },
           value: {
             show: true,
             fontSize: '16px',
-            fontWeight: 400
+            fontWeight: 400,
+             color:'var(--text-primary)',
           },
           total: {
             show: true,
             label: 'Total',
+            color:'var(--text-primary)',
             formatter: function (w) {
               return "₹" + w.globals.seriesTotals.reduce((a: number, b: number) => a + b, 0);
             }
@@ -99,12 +106,25 @@ this.chartOptions = {
         }
       }
     }
-  ]
+  ],
+  tooltip: {
+  custom: function({ series, seriesIndex, w }) {
+    const label = w.globals.labels[seriesIndex];
+    const value = series[seriesIndex];
+    return `
+      <div style="padding: 8px; background: #373deaff; color: white; border-radius: 4px;">
+        <strong>${label}</strong>: ₹${value.toLocaleString()}
+      </div>
+    `;
+  }
+}
+
 };
 
 
 
   }
+  
     ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const observer = new ResizeObserver(() => {

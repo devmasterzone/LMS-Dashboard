@@ -89,9 +89,9 @@ this.chartOptions = {
     }
   },
   grid: {
-     borderColor: this.isDarkTheme ? "#ff0000" : "#e5e7eb",
+     borderColor: this.isDarkTheme ? "#374151" : "#e5e7eb",
     row: {
-       colors: this.isDarkTheme ? ["#ff0000", "transparent"] : ["#f9fafb", "transparent"],
+       colors: this.isDarkTheme ? ["#1E1E1E", "transparent"] : ["#f9fafb", "transparent"],
       opacity: 0.5
     }
   },
@@ -151,7 +151,7 @@ updateThemeBasedChart(): void {
       grid: {
         borderColor: this.isDarkTheme ? "#374151" : "#e5e7eb",
         row: {
-          colors: this.isDarkTheme ? ["#1f2937", "transparent"] : ["#f9fafb", "transparent"],
+          colors: this.isDarkTheme ? ["#1E1E1E", "transparent"] : ["#f9fafb", "transparent"],
           opacity: 0.5
         }
       }

@@ -1,80 +1,188 @@
+// =======================
 // VARIABLES
+// =======================
 $font-family: Roboto, "Helvetica Neue", sans-serif;
 $border-radius: 0.35rem;
-$scrollbar-bg: #F5F5F5;
-$scrollbar-thumb: #A0A0A0;
-$scrollbar-thumb-hover: #555555;
-$gray: (
-  100: #f8f9fc,
-  200: #eaecf4,
-  300: #dddfeb,
-  400: #d1d3e2,
-  500: #b7b9cc,
-  600: #858796,
-  700: #6e707e,
-  800: #5a5c69,
-  900: #3a3b45,
-);
-$colors: (
-  primary: #4e73df,
-  secondary: #858796,
-  success: #1cc88a,
-  info: #36b9cc,
-  warning: #f6c23e,
-  danger: #e74a3b,
-  light: map-get($gray, 100),
-  dark: map-get($gray, 800),
-);
 
+// Theme Color Variables
+:root {
+  --border-radius:4px;
+  --bg-light: #f8f9fa;
+  --bg-dark: #1e1e1e;
+  --app-bg: #f1f1f1;
+  --hover-dark: #2c2c2c;
+
+  --text-primary: #737B8B;
+
+  --card-bg-color:#ffffff;
+  --sidenav-bg-color:#ffffff;
+  --icon-color:#737B8B;
+  --color-border:#e3e6f0;
+
+  --input-bg-color:#F8F9FA;
+  --placeholder-color:#737B8B;
+  --input-border-color:#F8F9FA;
+
+  --chart-text-color: #333333;
+
+  --white: #fff;
+
+  --primary: #4e73df;
+  --primary-dark: #2e59d9;
+
+  --secondary: #858796;
+  --secondary-dark: #6c6e78;
+
+  --success: #1cc88a;
+  --success-dark: #17a673;
+
+  --info: #36b9cc;
+  --info-dark: #2c9faf;
+
+  --warning: #f6c23e;
+  --warning-dark: #dda20a;
+
+  --danger: #e74a3b;
+  --danger-dark: #be2617;
+
+  --light: #f8f9fc;
+  --light-dark: #e2e6ea;
+
+  --dark: #5a5c69;
+  --dark-dark: #3a3b45;
+
+  --scrollbar-bg: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a0a0a0;
+}
+
+
+// Dark Theme Overrides
+.dark-theme {
+  --bg-light: #1e1e1e;
+  --bg-dark: #121212;
+  --app-bg: #121212;
+  --hover-dark: #2c2c2c;
+
+  --text-primary: #cfcfcf;
+  
+  --card-bg-color:#1e1e1e;
+  --sidenav-bg-color:#1e1e1e;
+  --icon-color:#cfcfcf;
+  --color-border:#2c2c2c;
+
+  --input-bg-color:#2A2A2A;
+  --placeholder-color:#cfcfcf;
+  --input-border-color:#3a3a3a;
+
+  --chart-text-color: #eeeeee;
+
+  --white:#ffffff;
+
+  --primary: #6c8eff;
+  --primary-dark: #4a6de0;
+
+  --secondary: #a0a0af;
+  --secondary-dark: #888899;
+
+  --success: #45dfac;
+  --success-dark: #27c493;
+
+  --info: #5cd3e6;
+  --info-dark: #36b9cc;
+
+  --warning: #ffda6a;
+  --warning-dark: #e5be45;
+
+  --danger: #f56a6a;
+  --danger-dark: #cc4949;
+
+  --light: #2d2d3a;
+  --light-dark: #20202b;
+
+  --dark: #c5c5d5;
+  --dark-dark: #a5a5b5;
+
+  --scrollbar-bg: #1a1a1a;
+  --scrollbar-thumb: #444444;
+  --scrollbar-thumb-hover: #666666;
+
+}
+
+
+// =======================
 // GLOBAL
+// =======================
 html, body {
   height: 100%;
   margin: 0;
-  font-family: $font-family;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
 }
 p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
   font-family: inherit;
+  color: var(--text-primary);
 }
 
+// =======================
 // SCROLLBAR
+// =======================
 ::-webkit-scrollbar {
   width: 6px;
-  background-color: $scrollbar-bg;
-}
-::-webkit-scrollbar-track {
-  background-color: $scrollbar-bg;
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-::-webkit-scrollbar-thumb {
-  background-color: $scrollbar-thumb;
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  &:hover {
-    background-color: $scrollbar-thumb-hover;
-  }
+  height: 6px;
+  background-color: var(--scrollbar-bg);
 }
 
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+// =======================
 // GRADIENT BACKGROUNDS
-@each $name, $color in $colors {
+// =======================
+$theme-colors: (primary, secondary, success, info, warning, danger, light, dark);
+@each $name in $theme-colors {
   .bg-gradient-#{$name} {
-    background-color: $color;
-    background-image: linear-gradient(180deg, $color 10%, darken($color, 15%) 100%);
+    background-color: var(--#{$name});
+    background-image: linear-gradient(
+      180deg,
+      var(--#{$name}) 10%,
+      var(--#{$name}-dark) 100%
+    );
     background-size: cover;
   }
 }
 
+
+// =======================
 // GRAY BACKGROUNDS AND TEXT
-@each $i, $val in $gray {
-  .bg-gray-#{$i} { background-color: $val !important; }
-  .text-gray-#{$i} { color: $val !important; }
+// =======================
+$gray-steps: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+@each $i in $gray-steps {
+  .bg-gray-#{$i} { background-color: var(--gray-#{$i}) !important; }
+  .text-gray-#{$i} { color: var(--gray-#{$i}) !important; }
 }
 
+// =======================
 // TEXT SIZES
+// =======================
 .text-xs { font-size: 0.7rem; }
 .text-lg { font-size: 1.2rem; }
 
+// =======================
 // UTILITY
+// =======================
 .o-hidden { overflow: hidden !important; }
 
 .icon-circle {
@@ -86,27 +194,31 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
   justify-content: center;
 }
 
+// =======================
 // BORDERS
-@each $name, $color in $colors {
+// =======================
+@each $name in $theme-colors {
   .border-left-#{$name} {
-    border-left: 0.25rem solid $color !important;
+    border-left: 0.25rem solid var(--#{$name}) !important;
   }
   .border-bottom-#{$name} {
-    border-bottom: 0.25rem solid $color !important;
+    border-bottom: 0.25rem solid var(--#{$name}) !important;
   }
 }
 
+// =======================
 // CARD COMPONENTS
+// =======================
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: var(--card-bg-color);
   background-clip: border-box;
-  border: 1px solid #e3e6f0;
-  border-radius: $border-radius;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
 
   .card-body {
     flex: 1 1 auto;
@@ -114,36 +226,27 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
     padding: 1.25rem;
   }
 
-  .card-title {
-    margin-bottom: 0.75rem;
-  }
-
+  .card-title { margin-bottom: 0.75rem; }
   .card-subtitle {
     margin-top: -0.375rem;
     margin-bottom: 0;
   }
 
-  .card-text:last-child {
-    margin-bottom: 0;
-  }
+  .card-text:last-child { margin-bottom: 0; }
 
   .card-link {
-    &:hover {
-      text-decoration: none;
-    }
-    & + .card-link {
-      margin-left: 1.25rem;
-    }
+    &:hover { text-decoration: none; }
+    & + .card-link { margin-left: 1.25rem; }
   }
 
   .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: map-get($gray, 100);
-    border-bottom: 1px solid #e3e6f0;
+    background-color: var(--gray-100);
+    border-bottom: 1px solid var(--color-border);
 
     &:first-child {
-      border-radius: calc(#{$border-radius} - 1px) calc(#{$border-radius} - 1px) 0 0;
+      border-radius: calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px) 0 0;
     }
 
     &-tabs {
@@ -161,11 +264,11 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
 
   .card-footer {
     padding: 0.75rem 1.25rem;
-    background-color: map-get($gray, 100);
-    border-top: 1px solid #e3e6f0;
+    background-color: var(--gray-100);
+    border-top: 1px solid var(--color-border);
 
     &:last-child {
-      border-radius: 0 0 calc(#{$border-radius} - 1px) calc(#{$border-radius} - 1px);
+      border-radius: 0 0 calc(var(--border-radius) - 1px) calc(var(--border-radius) - 1px);
     }
   }
 
@@ -173,7 +276,7 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     padding: 1.25rem;
-    border-radius: calc(#{$border-radius} - 1px);
+    border-radius: calc(var(--border-radius) - 1px);
   }
 
   .card-img,
@@ -185,18 +288,17 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
 
   .card-img,
   .card-img-top {
-    border-top-left-radius: calc(#{$border-radius} - 1px);
-    border-top-right-radius: calc(#{$border-radius} - 1px);
+    border-top-left-radius: calc(var(--border-radius) - 1px);
+    border-top-right-radius: calc(var(--border-radius) - 1px);
   }
 
   .card-img,
   .card-img-bottom {
-    border-bottom-right-radius: calc(#{$border-radius} - 1px);
-    border-bottom-left-radius: calc(#{$border-radius} - 1px);
+    border-bottom-right-radius: calc(var(--border-radius) - 1px);
+    border-bottom-left-radius: calc(var(--border-radius) - 1px);
   }
 }
 
-// CARD DECK & GROUP
 .card-deck, .card-group {
   > .card {
     margin-bottom: 0.75rem;
@@ -260,9 +362,7 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
   }
 
   @media (min-width: 576px) {
-    -moz-column-count: 3;
     column-count: 3;
-    -moz-column-gap: 1.25rem;
     column-gap: 1.25rem;
     orphans: 1;
     widows: 1;
@@ -273,3 +373,20 @@ p, h1, h2, h3, h4, h5, h6, span, li, div, td, th {
     }
   }
 }
+ .apexcharts-tooltip {
+    background-color: #1f2937 !important;
+    color: var(--text-primary) !important;
+  }
+
+  .apexcharts-legend-text,
+  .apexcharts-xaxis-label,
+  .apexcharts-yaxis-label {
+    fill:  var(--text-primary) !important;
+  }
+
+  .apexcharts-title-text {
+    fill:  var(--text-primary) !important;
+  }
+  .apexcharts-legend-text{
+    color:  var(--text-primary) !important;
+  }

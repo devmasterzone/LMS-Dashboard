@@ -1,21 +1,2 @@
 /* src/styles/components/_charts.scss */
 
-.dark-theme {
-  .apexcharts-tooltip {
-    background-color: #1f2937 !important;
-    color: #ffffff !important;
-  }
-
-  .apexcharts-legend-text,
-  .apexcharts-xaxis-label,
-  .apexcharts-yaxis-label {
-    fill: #e0e0e0 !important;
-  }
-
-  .apexcharts-title-text {
-    fill: #e0e0e0 !important;
-  }
-  .apexcharts-legend-text{
-    color: #e0e0e0 !important;
-  }
-}

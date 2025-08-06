@@ -1,12 +1,3 @@
-:root {
-  --bg-light: #f8f9fa;
-  --bg-dark: #1e1e1e;
-  --primary: #6a73fa;
-  --text-primary: #737B8B;
-  --white: #fff;
-  --hover-dark: #2c2c2c;
-  --app-bg: #f1f1f1;
-}
 
 // Layout base
 app-layout {
@@ -20,11 +11,20 @@ app-layout {
 }
 
 // Sidebar
-.sidenav {
-  background-color: var(--bg-light);
-  transition: width 0.3s ease;
-  border-radius: 0 !important;
+.sideNavOpened{
+  width: 16.25rem;
   max-width: 16.25rem;
+
+
+}
+.sideNavCosed{
+  width: 0;
+  max-width: 0;
+}
+.sidenav {
+  background-color: var(--sidenav-bg-color) !important;
+  transition: width 0.3s ease !important;
+  border-radius: 0 !important;
 
   .sidebar-header {
     padding: 16px;
@@ -55,6 +55,9 @@ app-layout {
     margin-left: 3%;
     border-radius: 4px !important;
     padding: 0 10px;
+    // &:hover{
+    //   background-color: var(--hover-dark);
+    // }
 
     .parent-menu-item-inner-wrapper,
     .parent-menu-item-content {
@@ -66,6 +69,7 @@ app-layout {
 
     .mat-icon {
       margin-right: 10px;
+      color: var(--icon-color);
     }
 
     .mdc-list-item__primary-text {
@@ -113,7 +117,7 @@ app-layout {
 .sidenav-menu-list {
   height: calc(100% - 80px);
   overflow: auto;
-  background-color: var(--white);
+background-color: var(--sidenav-bg-color);
 }
 
 .toggle-sidebar,
@@ -133,6 +137,12 @@ app-layout {
 }
 
 // Main Content
+.with-margin{
+margin-left: 260px !important;
+}
+.no-margin{
+  margin-left: 0 !important;
+}
 .main-content-wrapper {
   background: var(--app-bg);
   min-height: 100vh;
@@ -142,7 +152,7 @@ app-layout {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: var(--white);
+    background-color: var(--sidenav-bg-color);
 
     .title {
       font-weight: 500;
@@ -163,124 +173,15 @@ app-layout {
 .navbar-search {
   width: 25rem;
 }
+.navbar-search input{
+  background-color: var(--input-bg-color) !important;
+  border: 1px solid var(--input-border-color);
+  &::placeholder{
+    color:var(--placeholder-color)
+  }
+}
 
 .input-group .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-}
-
-// Dark Theme
-.dark-theme {
-  --bg-light: #1e1e1e;
-  --bg-dark: #121212;
-  --app-bg: #121212;
-  --primary: #6a73fa;
-  --text-primary: #cfcfcf;
-  --white: #1e1e1e;
-  --hover-dark: #2c2c2c;
-
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
-
-  .sidenav {
-    background-color: var(--bg-light);
-
-    .sidebar-header {
-      background-color: var(--primary);
-
-      .brand-title,
-      .brand-icon {
-        color: white;
-      }
-    }
-
-    .single-menu-item,
-    .parent-menu-item {
-      .mdc-list-item__primary-text {
-        color: var(--text-primary);
-      }
-
-      &:hover {
-        background-color: var(--hover-dark);
-      }
-    }
-
-    .submenu {
-      a {
-        color: var(--text-primary);
-
-        &:hover {
-          background-color: var(--hover-dark);
-        }
-
-        .mdc-list-item__primary-text {
-          color: var(--text-primary);
-        }
-      }
-    }
-  }
-
-  .sidenav-menu-list {
-    background-color: var(--bg-light);
-  }
-
-  .main-content-wrapper {
-    background-color: var(--bg-dark);
-
-    .main-toolbar {
-      background-color: var(--bg-light);
-
-      .title {
-        color: var(--text-primary);
-      }
-    }
-
-    .main-content {
-      color: var(--text-primary);
-    }
-  }
-
-  .toggle-sidebar,
-  .toggle-theme {
-    color: var(--text-primary);
-  }
-
-  .mat-list-item:hover {
-    background-color: var(--hover-dark);
-  }
-
-  .card {
-    background-color: var(--bg-light);
-    border-color: var(--hover-dark);
-
-    .card-header,
-    .card-footer {
-      background-color: var(--bg-light);
-      border-color: var(--hover-dark);
-    }
-
-    .card-title,
-    .card-subtitle,
-    .card-text {
-      color: var(--text-primary);
-    }
-  }
-
-  .navbar-search input {
-    background-color: #2a2a2a !important;
-    color: #e0e0e0 !important;
-    border: 1px solid #3a3a3a !important;
-    &::placeholder{
-      color: #e0e0e0 !important;
-    }
-  }
-
-  .input-group .btn {
-    background-color: var(--primary);
-    color: white;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }

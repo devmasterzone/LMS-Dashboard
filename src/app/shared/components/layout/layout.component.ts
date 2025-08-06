@@ -13,6 +13,7 @@ import { DashboardComponent } from '../../../module/dashboard/dashboard.componen
 import { BarChartComponent } from '../../../module/dashboard/charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from '../../../module/dashboard/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from '../../../module/dashboard/charts/line-chart/line-chart.component';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-layout',
@@ -34,54 +35,141 @@ export class LayoutComponent {
   @ViewChild(PieChartComponent) pieComponent!: PieChartComponent;
   @ViewChild(LineChartComponent!) lineComponent!: LineChartComponent;
    menu: SidebarMenu[] = [
-    {
-      title: 'Dashboard Light',
-      icon: 'dashboard',
-      route: '/dashboard-light'
-    },
-    {
-      title: 'Dashboard Dark',
-      icon: 'dark_mode',
-      route: '/dashboard-dark'
-    },
-    {
-      title: 'Event Management',
-      icon: 'event',
-      route: '/events'
-    },
-    {
-      title: 'Professors',
-      icon: 'person',
-      children: [
-        { title: 'All Professors', route: '/professors/all' },
-        { title: 'Add Professor', route: '/professors/add' },
-        { title: 'Edit Professor', route: '/professors/edit/1' },
-        { title: 'Professor Profile', route: '/professors/profile/1' }
-      ]
-    },
-    {
-      title: 'Students',
-      icon: 'groups',
-      children: [
-        { title: 'All Students', route: '/students/all' },
-        { title: 'Add Student', route: '/students/add' },
-        { title: 'Edit Student', route: '/students/edit/1' },
-        { title: 'Student Profile', route: '/students/profile/1' }
-      ]
-    },
-    {
-      title: 'Courses',
-      icon: 'book',
-      children: [
-        { title: 'All Courses', route: '/courses/all' },
-        { title: 'Add Course', route: '/courses/add' },
-        { title: 'Edit Course', route: '/courses/edit/1' },
-        { title: 'About Course', route: '/courses/about' }
-      ]
-    }
-  ];
+  {
+    title: 'Dashboard Light',
+    icon: 'dashboard',
+    route: '/dashboard-light'
+  },
+  {
+    title: 'Dashboard Dark',
+    icon: 'dark_mode',
+    route: '/dashboard-dark'
+  },
+  {
+    title: 'Event Management',
+    icon: 'event',
+    route: '/events'
+  },
+  {
+    title: 'Professors',
+    icon: 'person',
+    children: [
+      { title: 'All Professors', route: '/professors/all' },
+      { title: 'Add Professor', route: '/professors/add' },
+      { title: 'Edit Professor', route: '/professors/edit/1' },
+      { title: 'Professor Profile', route: '/professors/profile/1' }
+    ]
+  },
+  {
+    title: 'Students',
+    icon: 'groups',
+    children: [
+      { title: 'All Students', route: '/students/all' },
+      { title: 'Add Student', route: '/students/add' },
+      { title: 'Edit Student', route: '/students/edit/1' },
+      { title: 'Student Profile', route: '/students/profile/1' }
+    ]
+  },
+  {
+    title: 'Courses',
+    icon: 'book',
+    children: [
+      { title: 'All Courses', route: '/courses/all' },
+      { title: 'Add Course', route: '/courses/add' },
+      { title: 'Edit Course', route: '/courses/edit/1' },
+      { title: 'About Course', route: '/courses/about' }
+    ]
+  },
+  {
+    title: 'Library',
+    icon: 'local_library',
+    children: [
+      { title: 'All Books', route: '/library/books' },
+      { title: 'Add Book', route: '/library/add' },
+      { title: 'Issue History', route: '/library/history' }
+    ]
+  },
+  {
+    title: 'Departments',
+    icon: 'apartment',
+    children: [
+      { title: 'All Departments', route: '/departments/all' },
+      { title: 'Add Department', route: '/departments/add' }
+    ]
+  },
+  {
+    title: 'Staff',
+    icon: 'badge',
+    children: [
+      { title: 'All Staff', route: '/staff/all' },
+      { title: 'Add Staff', route: '/staff/add' },
+      { title: 'Staff Profile', route: '/staff/profile/1' }
+    ]
+  },
+  {
+    title: 'Holidays',
+    icon: 'calendar_month',
+    children: [
+      { title: 'Holiday List', route: '/holidays/list' },
+      { title: 'Add Holiday', route: '/holidays/add' }
+    ]
+  },
+  {
+    title: 'Fees',
+    icon: 'payments',
+    children: [
+      { title: 'All Fees', route: '/fees/all' },
+      { title: 'Add Fee Record', route: '/fees/add' },
+      { title: 'Fee Status', route: '/fees/status' }
+    ]
+  },
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  // ✅ Suggested Additions
+  {
+    title: 'Timetable',
+    icon: 'schedule',
+    route: '/timetable'
+  },
+  {
+    title: 'Announcements',
+    icon: 'campaign',
+    route: '/announcements'
+  },
+  {
+    title: 'Reports',
+    icon: 'insights',
+    route: '/reports'
+  },
+  {
+    title: 'Notifications',
+    icon: 'notifications',
+    route: '/notifications'
+  },
+  {
+    title: 'Admissions',
+    icon: 'how_to_reg',
+    route: '/admissions'
+  },
+  {
+    title: 'Examinations',
+    icon: 'assignment',
+    children: [
+      { title: 'Exam Schedule', route: '/exams/schedule' },
+      { title: 'Exam Results', route: '/exams/results' }
+    ]
+  },
+  {
+    title: 'Attendance',
+    icon: 'fact_check',
+    children: [
+      { title: 'Student Attendance', route: '/attendance/students' },
+      { title: 'Staff Attendance', route: '/attendance/staff' }
+    ]
+  }
+];
+
+
+  constructor(private breakpointObserver: BreakpointObserver, private themeService:ThemeService) {
     this.breakpointObserver.observe([Breakpoints.Handset])
       .subscribe(result => {
         this.isSideNavOpened = !result.matches;
@@ -99,16 +187,8 @@ export class LayoutComponent {
   }
 
   toggleTheme() {
-  this.isDarkTheme = !this.isDarkTheme;
-
-  // Add or remove the dark theme class on <body>
-  if (this.isDarkTheme) {
-    document.body.classList.add('dark-theme');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.body.classList.remove('dark-theme');
-    localStorage.setItem('theme', 'light');
-  }
+  this.themeService.toggleTheme();
+    this.isDarkTheme = this.themeService.isDark();
 }
   
   toggleSubmenu(title: string) {
