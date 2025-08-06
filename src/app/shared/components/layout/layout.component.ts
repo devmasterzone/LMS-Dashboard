@@ -36,14 +36,9 @@ export class LayoutComponent {
   @ViewChild(LineChartComponent!) lineComponent!: LineChartComponent;
    menu: SidebarMenu[] = [
   {
-    title: 'Dashboard Light',
+    title: 'Dashboard',
     icon: 'dashboard',
-    route: '/dashboard-light'
-  },
-  {
-    title: 'Dashboard Dark',
-    icon: 'dark_mode',
-    route: '/dashboard-dark'
+    route: '/dashboard'
   },
   {
     title: 'Event Management',
