@@ -1,1 +1,146 @@
-<p>professor-add works!</p>
+<app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+<div class="card p-4">
+      <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name" />
+      <div class="text-danger" *ngIf="professorForm.get('firstName')?.touched && professorForm.get('firstName')?.invalid">
+        First name is required (min 2 characters).
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName" placeholder="Enter Last Name" />
+      <div class="text-danger" *ngIf="professorForm.get('lastName')?.touched && professorForm.get('lastName')?.invalid">
+        Last name is required (min 2 characters).
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="example@domain.com" />
+      <div class="text-danger" *ngIf="professorForm.get('email')?.touched && professorForm.get('email')?.invalid">
+        Valid email is required.
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Joining Date</label>
+      <div class="position-relative">
+        <input
+          type="date"
+          class="form-control custom-date"
+          formControlName="joiningDate"
+        />
+        <i
+          class="fa fa-calendar-alt custom-date-icon"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+  <label class="form-label">Password</label>
+  <div class="position-relative">
+    <input
+      [type]="showPassword ? 'text' : 'password'"
+      class="form-control pe-5"
+      formControlName="password"
+      placeholder="Enter Password"
+    />
+    <i
+      class="showpassword fa"
+      [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="togglePassword()"
+      title="{{ showPassword ? 'Hide Password' : 'Show Password' }}"
+      style="position: absolute; top: 50%; right: 14px; transform: translateY(-50%); cursor: pointer; color: #6b7280;"
+    ></i>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Confirm Password</label>
+  <div class="position-relative">
+    <input
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      class="form-control pe-5"
+      formControlName="confirmPassword"
+      placeholder="Confirm Password"
+    />
+    <i
+      class="showpassword fa"
+      [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+      (click)="toggleConfirmPassword()"
+      title="{{ showConfirmPassword ? 'Hide Password' : 'Show Password' }}"
+      style="position: absolute; top: 50%; right: 14px; transform: translateY(-50%); cursor: pointer; color: #6b7280;"
+    ></i>
+  </div>
+</div>
+
+    <div class="col-md-6">
+      <label class="form-label">Mobile Number</label>
+      <input type="text" class="form-control" formControlName="mobile" placeholder="+91 9876543210" />
+      <div class="text-danger" *ngIf="professorForm.get('mobile')?.touched && professorForm.get('mobile')?.invalid">
+        Enter a valid 10-digit mobile number.
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Gender</label>
+      <select class="form-select" formControlName="gender">
+        <option disabled selected value="">Choose Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Designation</label>
+      <input type="text" class="form-control" formControlName="designation" placeholder="Designation" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Department</label>
+      <select class="form-select" formControlName="department">
+        <option disabled selected value="">Select Department</option>
+        <option>HR</option>
+        <option>IT</option>
+        <option>Sales</option>
+        <option>Finance</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Date of Birth</label>
+      <div class="position-relative">
+        <input type="date" class="form-control" formControlName="dob" />
+        <i
+          class="fa fa-calendar-alt custom-date-icon"
+          aria-hidden="true"
+        ></i>
+      </div>
+      
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Education</label>
+      <input type="text" class="form-control" formControlName="education" placeholder="Education Qualification" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Upload Profile</label>
+      <input type="file" class="form-control" formControlName="profile" />
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-center gap-2">
+    <button type="submit" class="btn btn-submit" [disabled]="professorForm.invalid">Submit</button>
+    <button type="button" class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
+
+    </div>

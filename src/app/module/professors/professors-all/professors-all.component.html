@@ -1,52 +1,74 @@
 <div class="page-wrapper">
-    <app-breadcrumb 
-  [pageTitle]="'All Professors'" 
-  [breadcrumbs]="[
-    { label: 'Home', url: '/' },
-    { label: 'Professors', url: '/professors' },
-    { label: 'All Professors' }
-  ]">
-</app-breadcrumb>
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>All Professors</h2>
-    <button class="btn btn-primary">+ Add New</button>
+  <div class="card p-4 mt-4 radius">
+
+<!-- Use your header component -->
+<app-table-header
+  [(searchTerm)]="searchTerm"
+  [pageSizeOptions]="pageSizeOptions"
+  [(pageSize)]="pageSize"
+  (pageSizeChange)="onPageSizeChange()"
+  (searchChange)="onSearchChange()"
+  [routeurl]="addprofessorulr"
+></app-table-header>
+
+    <!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table-header-cell">Profile</th>
+          <th class="table-header-cell">Name</th>
+          <th class="table-header-cell">Department</th>
+          <th class="table-header-cell">Gender</th>
+          <th class="table-header-cell">Education</th>
+          <th class="table-header-cell">Mobile</th>
+          <th class="table-header-cell">Email</th>
+          <th class="table-header-cell">Joining Date</th>
+          <th class="table-header-cell">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prof of paginatedProfessors">
+          <td class="table-data-cell">
+            <img
+              [src]="prof.profile"
+              alt="profile"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </td>
+          <td class="table-data-cell">{{ prof.name }}</td>
+          <td class="table-data-cell">{{ prof.department }}</td>
+          <td class="table-data-cell">{{ prof.gender }}</td>
+          <td class="table-data-cell">{{ prof.education }}</td>
+          <td class="table-data-cell">{{ prof.mobile }}</td>
+          <td class="table-data-cell">{{ prof.email }}</td>
+          <td class="table-data-cell">{{ prof.joiningDate }}</td>
+          <td class="table-data-cell">
+            <div class="d-flex">
+               <button class="btn btn-sm btn-primary iconbtn me-2">
+              <i class="material-icons">edit</i>
+            </button>
+            <button class="btn btn-sm btn-danger iconbtn ">
+              <i class="material-icons">delete</i>
+            </button>
+            </div>
+           
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+   
+<app-table-footer
+  [currentPage]="currentPage"
+  [pageSize]="pageSize"
+  [totalItems]="filteredProfessors.length"
+  [totalPages]="totalPages"
+  (pageChange)="changePage($event)"
+></app-table-footer>
+
   </div>
-
-  <div class="mb-3">
-    <button class="btn btn-outline-primary active me-2">List View</button>
-    <button class="btn btn-outline-primary">Grid View</button>
-  </div>
-
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr>
-        <th>Profile</th>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Gender</th>
-        <th>Education</th>
-        <th>Mobile</th>
-        <th>Email</th>
-        <th>Joining Date</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prof of professors">
-        <td><img [src]="prof.profile" alt="profile" class="rounded-circle" width="40" height="40" /></td>
-        <td>{{ prof.name }}</td>
-        <td>{{ prof.department }}</td>
-        <td>{{ prof.gender }}</td>
-        <td>{{ prof.education }}</td>
-        <td><strong>{{ prof.mobile }}</strong></td>
-        <td><strong>{{ prof.email }}</strong></td>
-        <td>{{ prof.joiningDate }}</td>
-        <td>
-          <button class="btn btn-sm btn-primary me-1"><i class="material-icons">edit</i></button>
-          <button class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>

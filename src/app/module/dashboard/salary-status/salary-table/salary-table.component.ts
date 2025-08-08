@@ -26,8 +26,6 @@ export class SalaryTableComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private el: ElementRef,
-    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {

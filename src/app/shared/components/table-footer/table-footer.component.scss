@@ -1,0 +1,28 @@
+.pagination {
+  .page-item {
+    .page-link {
+      background-color: var(--pagination-bg);
+      border: 1px solid var(--pagination-border);
+      color: var(--pagination-text);
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+        border-color: var(--pagination-border);
+      }
+    }
+
+    &.active .page-link {
+      background-color: var(--pagination-active-bg);
+      color: var(--pagination-active-text);
+      border-color: var(--pagination-active-bg);
+    }
+
+    &.disabled .page-link {
+      color: #a1a1a1;
+      background-color: var(--pagination-bg);
+      border-color: var(--pagination-border);
+      cursor: not-allowed;
+    }
+  }
+}

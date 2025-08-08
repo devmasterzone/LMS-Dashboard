@@ -169,17 +169,18 @@ margin-left: 260px !important;
   }
 }
 
-// Search Box
 .navbar-search {
   width: 25rem;
-}
-.navbar-search input{
-  background-color: var(--input-bg-color) !important;
-  border: 1px solid var(--input-border-color);
-  &::placeholder{
-    color:var(--placeholder-color)
+  .btn{
+    height: 45px;
   }
+  input{
+  background-color: var(--input-bg-color) !important;
 }
+
+  
+}
+
 
 .input-group .btn {
   border-top-left-radius: 0;

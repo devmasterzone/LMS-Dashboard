@@ -1,17 +1,60 @@
-.breadcrumb {
-  margin-bottom: 0;
-  font-size: 14px;
+.page-header {
+  background-color: var(--card-bg-color);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-  .breadcrumb-item + .breadcrumb-item::before {
-    content: '>';
-    padding: 0 8px;
-    color: #6c757d;
+  h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary); // Blue-600
   }
 
-  .breadcrumb-item.active {
-    color: #6c757d;
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: var(--breadcumb-color);
+      position: relative;
+
+      // &::after {
+      //   content: "›";
+      //   margin: 0 0.6rem;
+      //   color: #b0b0b0;
+      // }
+
+      &:last-child::after {
+        content: none;
+      }
+
+      &.active .breadcrumb-current {
+        font-weight: 600;
+        color: var(--breadcumb-active-color);
+        // background: #e0f2fe;
+        padding: 0.25rem 0;
+        // border-radius: 9999px;
+      }
+
+      a.breadcrumb-link {
+        color: #6c757d;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #1d4ed8;
+        }
+      }
+    }
   }
 }
-.page-header{
-    background-color: var(--bg-dark);
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--breadcumb-color) !important;
 }
