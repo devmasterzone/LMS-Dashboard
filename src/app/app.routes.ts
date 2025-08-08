@@ -31,51 +31,91 @@ import { FeeReceiptComponent } from './module/fees/fee-receipt/fee-receipt.compo
 
 export const routes: Routes = [
      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-     { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'events', component: EventsComponent },
 
   // Professors
-  { path: 'professors/all', component: ProfessorsAllComponent },
-  { path: 'professors/add', component: ProfessorAddComponent },
-  { path: 'professors/edit/:id', component: ProfessorEditComponent },
-  { path: 'professors/profile/:id', component: ProfessorProfileComponent },
+  {
+    path: 'professors',
+    children: [
+      { path: 'all', component: ProfessorsAllComponent },
+      { path: 'add', component: ProfessorAddComponent },
+      { path: 'edit', component: ProfessorEditComponent },
+      { path: 'profile', component: ProfessorProfileComponent }
+    ]
+  },
 
   // Students
-  { path: 'students/all', component: StudentsAllComponent },
-  { path: 'students/add', component: StudentAddComponent },
-  { path: 'students/edit/:id', component: StudentEditComponent },
-  { path: 'students/profile/:id', component: StudentProfileComponent },
+  {
+    path: 'students',
+    children: [
+      { path: 'all', component: StudentsAllComponent },
+      { path: 'add', component: StudentAddComponent },
+      { path: 'edit', component: StudentEditComponent },
+      { path: 'profile', component: StudentProfileComponent }
+    ]
+  },
 
   // Courses
-  { path: 'courses/all', component: CoursesAllComponent },
-  { path: 'courses/add', component: CourseAddComponent },
-  { path: 'courses/edit/:id', component: CourseEditComponent },
-  { path: 'courses/about', component: CourseAboutComponent },
+  {
+    path: 'courses',
+    children: [
+      { path: 'all', component: CoursesAllComponent },
+      { path: 'add', component: CourseAddComponent },
+      { path: 'edit', component: CourseEditComponent },
+      { path: 'about', component: CourseAboutComponent }
+    ]
+  },
 
   // Library
-  { path: 'library/books', component: LibraryBooksComponent },
-  { path: 'library/add', component: LibraryAddBookComponent },
-   {path: 'library/edit/:id', component: LibraryEditBookComponent },
-  { path: 'library/history', component: LibraryHistoryComponent },
+  {
+    path: 'library',
+    children: [
+      { path: 'books', component: LibraryBooksComponent },
+      { path: 'add', component: LibraryAddBookComponent },
+      { path: 'edit', component: LibraryEditBookComponent },
+      { path: 'history', component: LibraryHistoryComponent }
+    ]
+  },
 
   // Departments
-  { path: 'departments/all', component: DepartmentsAllComponent },
-  { path: 'departments/add', component: DepartmentAddComponent },
-  { path: 'departments/edit/:id', component: DepartmentEditComponent },
+  {
+    path: 'departments',
+    children: [
+      { path: 'all', component: DepartmentsAllComponent },
+      { path: 'add', component: DepartmentAddComponent },
+      { path: 'edit', component: DepartmentEditComponent }
+    ]
+  },
 
   // Staff
-  { path: 'staff/all', component: StaffAllComponent },
-  { path: 'staff/add', component: StaffAddComponent },
-  { path: 'staff/profile/:id', component: StaffProfileComponent },
+  {
+    path: 'staff',
+    children: [
+      { path: 'all', component: StaffAllComponent },
+      { path: 'add', component: StaffAddComponent },
+      { path: 'profile', component: StaffProfileComponent }
+    ]
+  },
 
   // Holidays
-  { path: 'holidays/list', component: HolidayListComponent },
-  { path: 'holidays/add', component: HolidayAddComponent },
+  {
+    path: 'holidays',
+    children: [
+      { path: 'list', component: HolidayListComponent },
+      { path: 'add', component: HolidayAddComponent }
+    ]
+  },
 
   // Fees
-  { path: 'fees/collection', component: FeesCollectionComponent },
-  { path: 'fees/add', component: FeeAddComponent },
-  { path: 'fees/receipt', component: FeeReceiptComponent },
+  {
+    path: 'fees',
+    children: [
+      { path: 'collection', component: FeesCollectionComponent },
+      { path: 'add', component: FeeAddComponent },
+      { path: 'receipt', component: FeeReceiptComponent }
+    ]
+  }
 
   // // Extras
   // { path: 'timetable', component: TimetableComponent },
