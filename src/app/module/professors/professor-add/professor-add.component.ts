@@ -78,8 +78,6 @@ export class ProfessorAddComponent {
       this.showConfirmPassword = !this.showConfirmPassword;
     }
   }
-  //  showPassword = false;
-  // showConfirmPassword = false;
 
   togglePassword() {
     this.showPassword = !this.showPassword;

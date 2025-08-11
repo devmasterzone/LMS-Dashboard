@@ -6,6 +6,7 @@ $border-radius: 0.35rem;
 
 // Theme Color Variables
 :root {
+
   --border-radius:4px;
   --bg-light: #f8f9fa;
   --bg-dark: #1e1e1e;
@@ -577,3 +578,21 @@ tbody tr {
   color: var(--hover-show-password-color) !important; // darker on hover
 }
 
+.custom-date::-webkit-calendar-picker-indicator {
+  opacity: 0; /* Hide default icon */
+  cursor: pointer;
+}
+
+.custom-date-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #aaa; /* Light color by default */
+}
+
+/* Dark theme override */
+body.dark-theme .custom-date-icon {
+  color: #f0f0f0; /* Light icon on dark bg */
+}

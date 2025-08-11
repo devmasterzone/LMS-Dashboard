@@ -48,11 +48,11 @@
           <td class="table-data-cell">{{ prof.joiningDate }}</td>
           <td class="table-data-cell">
             <div class="d-flex">
-               <button class="btn btn-sm btn-primary iconbtn me-2">
-              <i class="material-icons">edit</i>
+               <button class="btn btn-sm btn-primary iconbtn me-2" (click)="goToAddPage()">
+              <i class="material-icons" >edit</i>
             </button>
             <button class="btn btn-sm btn-danger iconbtn ">
-              <i class="material-icons">delete</i>
+              <i class="material-icons" (click)="confirmDelete(prof)">delete</i>
             </button>
             </div>
            

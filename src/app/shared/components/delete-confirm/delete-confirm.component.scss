@@ -1,0 +1,113 @@
+.swal-dialog {
+  text-align: center;
+  padding: 25px 30px;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  animation: popupScale 0.35s ease-out;
+  font-family: roboto;
+
+  .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .dialog-icon {
+      font-size: 48px;
+      height: 48px;
+      width: 48px;
+    }
+  }
+
+  .dialog-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #333;
+  }
+
+  .dialog-message {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    button {
+      min-width: 110px;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+  }
+}
+
+/* Variant Colors */
+.delete .icon-wrapper {
+  background: rgba(244, 67, 54, 0.15);
+  .dialog-icon { color: #f44336; }
+}
+
+.success .icon-wrapper {
+  background: rgba(76, 175, 80, 0.15);
+  .dialog-icon { color: #4caf50; }
+}
+
+.warning .icon-wrapper {
+  background: rgba(255, 193, 7, 0.15);
+  .dialog-icon { color: #ffc107; }
+}
+
+.info .icon-wrapper {
+  background: rgba(33, 150, 243, 0.15);
+  .dialog-icon { color: #2196f3; }
+}
+
+@keyframes popupScale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+  button {
+    min-width: 110px;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 6px 14px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Cancel button style */
+  .mat-mdc-stroked-button {
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    color: #333;
+
+    &:hover {
+      background-color: #e0e0e0;
+      border-color: #bdbdbd;
+    }
+  }
+
+  /* Delete button style */
+  .mat-mdc-raised-button {
+    background-color: #f44336 !important;
+    color: #fff !important;
+    box-shadow: 0 3px 6px rgba(244, 67, 54, 0.3);
+
+    &:hover {
+      background-color: #d32f2f !important;
+      box-shadow: 0 4px 10px rgba(244, 67, 54, 0.4);
+    }
+  }
+}

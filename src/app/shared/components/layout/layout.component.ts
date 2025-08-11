@@ -51,8 +51,8 @@ export class LayoutComponent {
     children: [
       { title: 'All Professors', route: '/professors/all' },
       { title: 'Add Professor', route: '/professors/add' },
-      { title: 'Edit Professor', route: '/professors/edit/1' },
-      { title: 'Professor Profile', route: '/professors/profile/1' }
+      { title: 'Edit Professor', route: '/professors/edit' },
+      { title: 'Professor Profile', route: '/professors/profile' }
     ]
   },
   {

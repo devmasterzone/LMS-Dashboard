@@ -30,7 +30,7 @@ import { FeeAddComponent } from './module/fees/fee-add/fee-add.component';
 import { FeeReceiptComponent } from './module/fees/fee-receipt/fee-receipt.component';
 
 export const routes: Routes = [
-     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'events', component: EventsComponent },
 
