@@ -1,1 +1,64 @@
-<p>library-edit-book works!</p>
+<div class="card p-4 mt-4 radius">
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+
+    <!-- Book Title -->
+    <div class="mb-3">
+      <label class="form-label">Book Title</label>
+      <input type="text" class="form-control" formControlName="title" placeholder="Enter book title" />
+      <div class="text-danger" *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.invalid">
+        Title is required (max 150 chars).
+      </div>
+    </div>
+
+    <!-- Author -->
+    <div class="mb-3">
+      <label class="form-label">Author</label>
+      <input type="text" class="form-control" formControlName="author" placeholder="Enter author name" />
+      <div class="text-danger" *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.invalid">
+        Author is required (max 100 chars).
+      </div>
+    </div>
+
+    <!-- ISBN -->
+    <div class="mb-3">
+      <label class="form-label">ISBN</label>
+      <input type="text" class="form-control" formControlName="isbn" placeholder="978-1234567890" />
+      <div class="text-danger" *ngIf="bookForm.get('isbn')?.touched && bookForm.get('isbn')?.invalid">
+        ISBN is required (10–20 digits, may include hyphen).
+      </div>
+    </div>
+
+    <!-- Available Copies -->
+    <div class="mb-3">
+      <label class="form-label">Available Copies</label>
+      <input type="number" class="form-control" formControlName="copiesAvailable" />
+      <div class="text-danger" *ngIf="bookForm.get('copiesAvailable')?.touched && bookForm.get('copiesAvailable')?.invalid">
+        Must be 0 or more.
+      </div>
+    </div>
+
+    <!-- Total Copies -->
+    <div class="mb-3">
+      <label class="form-label">Total Copies</label>
+      <input type="number" class="form-control" formControlName="totalCopies" />
+      <div class="text-danger" *ngIf="bookForm.get('totalCopies')?.touched && bookForm.get('totalCopies')?.invalid">
+        Must be at least 1.
+      </div>
+    </div>
+
+    <!-- Added Date -->
+    <div class="mb-3">
+      <label class="form-label">Date Added</label>
+      <input type="date" class="form-control" formControlName="addedDate" />
+      <div class="text-danger" *ngIf="bookForm.get('addedDate')?.touched && bookForm.get('addedDate')?.invalid">
+        Date is required.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary me-2" (click)="onReset()">Reset</button>
+      <button type="submit" class="btn btn-primary">Save Book</button>
+    </div>
+  </form>
+</div>

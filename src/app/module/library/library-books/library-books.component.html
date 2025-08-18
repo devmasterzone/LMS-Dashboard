@@ -1,1 +1,65 @@
-<p>library-books works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+ 
+  <div class="card p-4 mt-4 radius">
+
+    <!-- Header Component -->
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+
+    <!-- Courses Table -->
+     <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Book Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Available Copies</th>
+        <th>Total Copies</th>
+        <th>Date Added</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of paginatedBooks">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.copiesAvailable }}</td>
+        <td>{{ book.totalCopies }}</td>
+        <td>{{ book.addedDate }}</td>
+        <td>
+          <div class="d-flex">
+            <button class="btn btn-sm btn-primary iconbtn me-2" (click)="editBook(book)">
+              <i class="material-icons">edit</i>
+            </button>
+            <button class="btn btn-sm btn-danger iconbtn" (click)="confirmDelete(book)">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    
+
+    <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredBooks.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+
+  </div>
+</div>

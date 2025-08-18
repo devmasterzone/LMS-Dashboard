@@ -1,1 +1,105 @@
-<p>student-profile works!</p>
+<div class="page-wrapper">
+  <div class="card profile-card">
+    <!-- Header -->
+    <div class="profile-header d-flex align-items-center gap-3">
+      <img [src]="student.photo" alt="Student Photo" class="profile-img" />
+      <div>
+        <h3>{{ student.name }}</h3>
+        <p class="text-muted mb-0">Roll No: {{ student.rollNo }}</p>
+        <p class="text-muted mb-0">{{ student.course }} ({{ student.year }})</p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mt-3">
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='overview'" (click)="setTab('overview')">
+          Overview
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='courses'" (click)="setTab('courses')">
+          Courses
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='attendance'" (click)="setTab('attendance')">
+          Attendance
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" [class.active]="activeTab==='contact'" (click)="setTab('contact')">
+          Contact
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content p-3">
+      <!-- Overview -->
+      <div *ngIf="activeTab==='overview'">
+        <h5>Basic Information</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Date of Birth:</strong> {{ student.dob }}</li>
+          <li class="list-group-item"><strong>Roll No:</strong> {{ student.rollNo }}</li>
+          <li class="list-group-item"><strong>Course:</strong> {{ student.course }}</li>
+          <li class="list-group-item"><strong>Year:</strong> {{ student.year }}</li>
+        </ul>
+      </div>
+
+      <!-- Courses -->
+      <div *ngIf="activeTab==='courses'">
+        <h5>Enrolled Courses</h5>
+        <table class="table table-bordered mt-2">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Course Name</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of student.courses">
+              <td>{{ c.code }}</td>
+              <td>{{ c.name }}</td>
+              <td>{{ c.grade }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Attendance -->
+      <div *ngIf="activeTab==='attendance'">
+        <h5>Attendance</h5>
+        <table class="table table-bordered mt-2">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Attended</th>
+              <th>Total</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of student.attendance">
+              <td>{{ a.subject }}</td>
+              <td>{{ a.attended }}</td>
+              <td>{{ a.total }}</td>
+              <td>{{ getAttendancePercent(a.attended, a.total) }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Contact -->
+      <div *ngIf="activeTab==='contact'">
+        <h5>Contact Information</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Email:</strong> {{ student.email }}</li>
+          <li class="list-group-item"><strong>Phone:</strong> {{ student.phone }}</li>
+          <li class="list-group-item"><strong>Address:</strong> {{ student.address }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

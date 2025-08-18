@@ -1,0 +1,36 @@
+<div class="card shadow p-4 mt-4">
+  <h4 class="mb-3">{{ isEdit ? 'Edit Admission' : 'New Admission' }}</h4>
+
+  <form [formGroup]="admissionForm" (ngSubmit)="saveAdmission()">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Course</label>
+      <select class="form-select" formControlName="course">
+        <option *ngFor="let c of courses" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Year</label>
+      <input type="number" class="form-control" formControlName="year">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" formControlName="status">
+        <option>Pending</option>
+        <option>Approved</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary me-2">Cancel</button>
+      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Update' : 'Add' }}</button>
+    </div>
+  </form>
+</div>

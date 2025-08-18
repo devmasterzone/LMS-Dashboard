@@ -28,6 +28,12 @@ import { HolidayAddComponent } from './module/holiday/holiday-add/holiday-add.co
 import { FeesCollectionComponent } from './module/fees/fees-collection/fees-collection.component';
 import { FeeAddComponent } from './module/fees/fee-add/fee-add.component';
 import { FeeReceiptComponent } from './module/fees/fee-receipt/fee-receipt.component';
+import { TimeTableComponent } from './module/time-table/time-table.component';
+import { AnnouncementsComponent } from './module/announcements/announcements.component';
+import { AdmissionsComponent } from './module/admissions/admissions.component';
+import { AddEditadmissionComponent } from './module/admissions/add-editadmission/add-editadmission.component';
+import { StudentAttendanceComponent } from './module/student-attendance/student-attendance.component';
+import { StaffAttendanceComponent } from './module/staff-attendance/staff-attendance.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -115,22 +121,24 @@ export const routes: Routes = [
       { path: 'add', component: FeeAddComponent },
       { path: 'receipt', component: FeeReceiptComponent }
     ]
-  }
+  },
 
   // // Extras
-  // { path: 'timetable', component: TimetableComponent },
-  // { path: 'announcements', component: AnnouncementsComponent },
+  { path: 'timetable', component: TimeTableComponent },
+  { path: 'announcements', component: AnnouncementsComponent },
   // { path: 'reports', component: ReportsComponent },
   // { path: 'notifications', component: NotificationsComponent },
-  // { path: 'admissions', component: AdmissionsComponent },
+  { path: 'admissions', component: AdmissionsComponent },
+  { path: 'admissions/add', component: AddEditadmissionComponent },
+  
 
   // // Exams
   // { path: 'exams/schedule', component: ExamScheduleComponent },
   // { path: 'exams/results', component: ExamResultsComponent },
 
   // // Attendance
-  // { path: 'attendance/students', component: StudentAttendanceComponent },
-  // { path: 'attendance/staff', component: StaffAttendanceComponent },
+  { path: 'attendance/students', component: StudentAttendanceComponent },
+  { path: 'attendance/staff', component: StaffAttendanceComponent },
 
   // // Redirect and fallback
   // { path: '', redirectTo: '/dashboard-light', pathMatch: 'full' },

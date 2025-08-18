@@ -1,1 +1,94 @@
-<p>library-history works!</p>
+<!-- Header (optional – reuse your header if you have one) -->
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+  <div class="card p-4 mt-4 radius">
+    <app-table-header
+  [(searchTerm)]="searchTerm"
+  [pageSizeOptions]="pageSizeOptions"
+  [(pageSize)]="pageSize"
+  (pageSizeChange)="onPageSizeChange()"
+  (searchChange)="onSearchChange()"
+  [routeurl]="addIssueUrl"
+  [showAddButton]="false">
+</app-table-header>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Issue #</th>
+        <th>Member</th>
+        <th>Book</th>
+        <th>ISBN</th>
+        <th>Issue Date</th>
+        <th>Due Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let issue of paginatedIssues">
+        <td>{{ issue.issueId }}</td>
+        <td>
+          <div class="d-flex flex-column">
+            <span class="fw-semibold">{{ issue.memberName }}</span>
+            <small class="text-muted" *ngIf="issue.memberEmail">{{ issue.memberEmail }}</small>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex flex-column">
+            <span class="fw-semibold">{{ issue.bookTitle }}</span>
+            <small class="text-muted" *ngIf="issue.category">{{ issue.category }}</small>
+          </div>
+        </td>
+        <td>{{ issue.isbn }}</td>
+        <td>{{ issue.issueDate | date:'yyyy-MM-dd' }}</td>
+        <td>{{ issue.dueDate   | date:'yyyy-MM-dd' }}</td>
+        <td>{{ issue.returnDate ? (issue.returnDate | date:'yyyy-MM-dd') : '-' }}</td>
+        <td>
+          <span class="badge"
+                [ngClass]="{
+                  'bg-success': issue.status === 'RETURNED',
+                  'bg-warning': issue.status === 'ISSUED',
+                  'bg-danger':  issue.status === 'OVERDUE'
+                }">
+            {{ issue.status }}
+          </span>
+        </td>
+        <td>
+          <div class="d-flex">
+            <button class="btn btn-sm btn-danger iconbtn me-2" (click)="confirmDelete(issue)">
+              <i class="material-icons">delete</i>
+            </button>
+            <button class="btn btn-sm btn-success iconbtn" *ngIf="issue.status !== 'RETURNED'" (click)="markReturned(issue)">
+              <i class="material-icons">assignment_turned_in</i>
+            </button>
+            
+          </div>
+        </td>
+      </tr>
+
+      <!-- Empty state -->
+      <tr *ngIf="paginatedIssues.length === 0">
+        <td colspan="9" class="text-center text-muted py-4">
+          No issue records found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer (optional – reuse your footer if you have one) -->
+<app-table-footer
+  [currentPage]="currentPage"
+  [pageSize]="pageSize"
+  [totalItems]="filteredIssues.length"
+  [totalPages]="totalPages"
+  (pageChange)="changePage($event)">
+</app-table-footer>
+  </div>
+</div>
+
+

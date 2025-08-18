@@ -40,11 +40,11 @@ export class LayoutComponent {
     icon: 'dashboard',
     route: '/dashboard'
   },
-  {
-    title: 'Event Management',
-    icon: 'event',
-    route: '/events'
-  },
+  // {
+  //   title: 'Event Management',
+  //   icon: 'event',
+  //   route: '/events'
+  // },
   {
     title: 'Professors',
     icon: 'person',
@@ -62,7 +62,7 @@ export class LayoutComponent {
       { title: 'All Students', route: '/students/all' },
       { title: 'Add Student', route: '/students/add' },
       { title: 'Edit Student', route: '/students/edit/1' },
-      { title: 'Student Profile', route: '/students/profile/1' }
+      { title: 'Student Profile', route: '/students/profile' }
     ]
   },
   {
@@ -98,7 +98,7 @@ export class LayoutComponent {
     children: [
       { title: 'All Staff', route: '/staff/all' },
       { title: 'Add Staff', route: '/staff/add' },
-      { title: 'Staff Profile', route: '/staff/profile/1' }
+      { title: 'Staff Profile', route: '/staff/profile' }
     ]
   },
   {
@@ -113,9 +113,9 @@ export class LayoutComponent {
     title: 'Fees',
     icon: 'payments',
     children: [
-      { title: 'All Fees', route: '/fees/all' },
+      { title: 'All Fees', route: '/fees/collection' },
       { title: 'Add Fee Record', route: '/fees/add' },
-      { title: 'Fee Status', route: '/fees/status' }
+      { title: 'Fee Receipt', route: '/fees/receipt' }
     ]
   },
 
@@ -130,29 +130,29 @@ export class LayoutComponent {
     icon: 'campaign',
     route: '/announcements'
   },
-  {
-    title: 'Reports',
-    icon: 'insights',
-    route: '/reports'
-  },
+  // {
+  //   title: 'Reports',
+  //   icon: 'insights',
+  //   route: '/reports'
+  // },
   {
     title: 'Notifications',
     icon: 'notifications',
     route: '/notifications'
   },
-  {
-    title: 'Admissions',
-    icon: 'how_to_reg',
-    route: '/admissions'
-  },
-  {
-    title: 'Examinations',
-    icon: 'assignment',
-    children: [
-      { title: 'Exam Schedule', route: '/exams/schedule' },
-      { title: 'Exam Results', route: '/exams/results' }
-    ]
-  },
+  // {
+  //   title: 'Admissions',
+  //   icon: 'how_to_reg',
+  //   route: '/admissions'
+  // },
+  // {
+  //   title: 'Examinations',
+  //   icon: 'assignment',
+  //   children: [
+  //     { title: 'Exam Schedule', route: '/exams/schedule' },
+  //     { title: 'Exam Results', route: '/exams/results' }
+  //   ]
+  // },
   {
     title: 'Attendance',
     icon: 'fact_check',

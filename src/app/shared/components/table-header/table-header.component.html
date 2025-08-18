@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <button class="btn btn-primary" (click)="goToAddPage()">
+   <button *ngIf="showAddButton" class="btn btn-primary" (click)="goToAddPage()">
     <mat-icon class="me-1">add</mat-icon> Add New
   </button>
 </div>

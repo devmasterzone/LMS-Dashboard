@@ -1,0 +1,29 @@
+.page-wrapper {
+  padding: 20px;
+}
+
+.profile-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.profile-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+}
+
+.nav-tabs .nav-link {
+  cursor: pointer;
+}
+
+.table {
+  font-size: 14px;
+}

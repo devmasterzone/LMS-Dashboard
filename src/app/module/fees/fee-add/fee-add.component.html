@@ -1,1 +1,81 @@
-<p>fee-add works!</p>
+<mat-card class="p-4 shadow radius">
+  <h2 class="mb-3 text-center">➕ Add Fee Record</h2>
+
+  <form [formGroup]="feeForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-grid">
+      <!-- Student Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Student Name</mat-label>
+        <input type="text" matInput [matAutocomplete]="auto" formControlName="studentName"
+               placeholder="Start typing student name">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let student of filteredStudents" [value]="student">
+            {{ student }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="feeForm.get('studentName')?.touched && feeForm.get('studentName')?.invalid">
+          Student name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Department -->
+      <mat-form-field appearance="outline">
+        <mat-label>Department</mat-label>
+        <mat-select formControlName="department">
+          <mat-option *ngFor="let dept of departments" [value]="dept">{{ dept }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="feeForm.get('department')?.touched && feeForm.get('department')?.invalid">
+          Department is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fee Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>Fee Type</mat-label>
+        <mat-select formControlName="feeType">
+          <mat-option *ngFor="let type of feeTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="feeForm.get('feeType')?.touched && feeForm.get('feeType')?.invalid">
+          Fee type is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Amount -->
+      <mat-form-field appearance="outline">
+        <mat-label>Amount (₹)</mat-label>
+        <input type="number" matInput formControlName="amount" placeholder="Enter fee amount">
+        <mat-error *ngIf="feeForm.get('amount')?.touched && feeForm.get('amount')?.invalid">
+          Amount must be at least ₹100.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Due Date -->
+      <mat-form-field appearance="outline">
+        <mat-label>Due Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate" [class.overdue]="isOverdue()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="feeForm.get('dueDate')?.touched && feeForm.get('dueDate')?.invalid">
+          Due Date is required.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Status -->
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="Pending">Pending</mat-option>
+          <mat-option value="Paid">Paid</mat-option>
+          <mat-option value="Overdue">Overdue</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" mat-stroked-button color="warn" (click)="onReset()">Reset</button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="feeForm.invalid">Save Fee Record</button>
+    </div>
+  </form>
+</mat-card>

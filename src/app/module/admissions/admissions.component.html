@@ -1,0 +1,121 @@
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="'Admissions'" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <!-- Header with actions -->
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div class="d-flex align-items-center gap-2">
+      <input type="text" class="form-control" placeholder="Search by name..."
+             [(ngModel)]="searchTerm" (input)="filterAdmissions()" />
+      <select class="form-select" [(ngModel)]="filterCourse" (change)="filterAdmissions()">
+        <option value="">All Courses</option>
+        <option *ngFor="let c of courses" [value]="c">{{ c }}</option>
+      </select>
+      <select class="form-select" [(ngModel)]="pageSize" (change)="filterAdmissions()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
+     <div class="d-flex justify-content-between mb-3">
+    <input type="text" class="form-control w-25" placeholder="Search by name..." />
+    <button class="btn btn-primary" (click)="newAdmission()">+ New Admission</button>
+  </div>
+  </div>
+
+  <!-- Admissions Table -->
+  <div class="card p-3 shadow-sm radius">
+    <table class="table table-hover table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th (click)="sortBy('id')"># <i [class]="sortField==='id' ? 'bi bi-arrow-' + sortDirection : ''"></i></th>
+          <th (click)="sortBy('name')">Name <i [class]="sortField==='name' ? 'bi bi-arrow-' + sortDirection : ''"></i></th>
+          <th (click)="sortBy('course')">Course <i [class]="sortField==='course' ? 'bi bi-arrow-' + sortDirection : ''"></i></th>
+          <th (click)="sortBy('year')">Year <i [class]="sortField==='year' ? 'bi bi-arrow-' + sortDirection : ''"></i></th>
+          <th (click)="sortBy('status')">Status <i [class]="sortField==='status' ? 'bi bi-arrow-' + sortDirection : ''"></i></th>
+          <th>Applied Date</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let admission of paginatedAdmissions">
+          <td>{{ admission.id }}</td>
+          <td>{{ admission.name }}</td>
+          <td>{{ admission.course }}</td>
+          <td>{{ admission.year }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-warning': admission.status === 'Pending',
+                    'bg-success': admission.status === 'Approved',
+                    'bg-danger': admission.status === 'Rejected'
+                  }"
+                  [title]="'This admission is ' + admission.status">
+              {{ admission.status }}
+            </span>
+          </td>
+          <td>{{ admission.appliedDate | date }}</td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-info me-1" (click)="viewAdmission(admission)">View</button>
+            <button class="btn btn-sm btn-warning me-1" (click)="editAdmission(admission)">Edit</button>
+            <button class="btn btn-sm btn-success me-1" (click)="updateStatus(admission, 'Approved')">Approve</button>
+            <button class="btn btn-sm btn-danger me-1" (click)="updateStatus(admission, 'Rejected')">Reject</button>
+            <button class="btn btn-sm btn-secondary" (click)="deleteAdmission(admission.id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="paginatedAdmissions.length === 0">
+          <td colspan="7" class="text-center text-muted">No admissions found.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Custom Pagination -->
+    <nav *ngIf="totalPages > 1" class="mt-3">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="goToPage(currentPage - 1)">Previous</button>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === i + 1">
+          <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="goToPage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal fade" id="admissionModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content radius shadow">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ editingAdmission ? 'Edit Admission' : 'New Admission' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form [formGroup]="admissionForm" (ngSubmit)="saveAdmission()">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Course</label>
+              <select class="form-select" formControlName="course">
+                <option *ngFor="let c of courses" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Year</label>
+              <input type="number" class="form-control" formControlName="year">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">{{ editingAdmission ? 'Update' : 'Add' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

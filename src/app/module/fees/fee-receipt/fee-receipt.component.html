@@ -1,1 +1,79 @@
-<p>fee-receipt works!</p>
+<div class="container mt-4" id="receipt">
+  <div class="card shadow-lg p-4">
+
+    <!-- College Header -->
+    <div class="text-center border-bottom pb-3 mb-3">
+      <img src="assets/college-logo.png" alt="College Logo" width="80" height="80" />
+      <h2 class="fw-bold mt-2">ABC Engineering College</h2>
+      <p class="mb-0">NH-44, Nagpur, Maharashtra - 440001</p>
+      <p>Email: info@abccollege.edu.in | Phone: +91 9876543210</p>
+    </div>
+
+    <!-- Receipt Header -->
+    <div class="d-flex justify-content-between mb-3">
+      <h5><strong>Fee Receipt</strong></h5>
+      <p><strong>Receipt No:</strong> {{ receiptData.receiptNo }}</p>
+    </div>
+
+    <!-- Student Info -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <p><strong>Student Name:</strong> {{ receiptData.studentName }}</p>
+        <p><strong>Roll No:</strong> {{ receiptData.rollNo }}</p>
+        <p><strong>Course:</strong> {{ receiptData.course }}</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <p><strong>Semester:</strong> {{ receiptData.semester }}</p>
+        <p><strong>Payment Date:</strong> {{ receiptData.paymentDate }}</p>
+        <p><strong>Mode:</strong> {{ receiptData.paymentMode }}</p>
+      </div>
+    </div>
+
+    <!-- Fee Breakdown -->
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Sr. No</th>
+          <th>Fee Type</th>
+          <th>Amount (₹)</th>
+          <th>Paid (₹)</th>
+          <th>Balance (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of receiptData.feeDetails; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.feeType }}</td>
+          <td>{{ item.amount }}</td>
+          <td>{{ item.paid }}</td>
+          <td>{{ item.amount - item.paid }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Summary -->
+    <div class="row mt-3">
+      <div class="col-md-6">
+        <p><strong>Transaction ID:</strong> {{ receiptData.transactionId }}</p>
+        <p><strong>Remarks:</strong> {{ receiptData.remarks }}</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <h5><strong>Total Amount:</strong> ₹{{ getTotalAmount() }}</h5>
+        <h5 class="text-success"><strong>Total Paid:</strong> ₹{{ getTotalPaid() }}</h5>
+        <h5 class="text-danger"><strong>Balance:</strong> ₹{{ getBalance() }}</h5>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-4 border-top pt-3">
+      <p class="mb-0">This is a computer-generated receipt. No signature required.</p>
+    </div>
+
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="text-center mt-3">
+    <button class="btn btn-primary me-2" (click)="printReceipt()">Print</button>
+    <button class="btn btn-success" (click)="downloadReceipt()">Download PDF</button>
+  </div>
+</div>

@@ -1,1 +1,89 @@
-<p>course-about works!</p>
+<div class="page-wrapper">
+  <div class="container my-5">
+
+    <!-- Course Header -->
+    <div class="course-header text-white p-5 rounded shadow mb-4">
+      <h2 class="fw-bold">{{ course.name }}</h2>
+      <p class="lead">{{ course.details }}</p>
+      <div class="d-flex gap-3 mt-3 flex-wrap">
+        <span class="badge bg-light text-dark px-3 py-2">Code: {{ course.code }}</span>
+        <span class="badge bg-light text-dark px-3 py-2">Duration: {{ course.duration }}</span>
+        <span class="badge bg-light text-dark px-3 py-2">Start: {{ course.startFrom | date:'longDate' }}</span>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row g-4">
+      
+      <!-- Left Section -->
+      <div class="col-lg-8">
+        <div class="card shadow-sm border-0 mb-4">
+          <img [src]="course.photo" class="img-fluid rounded-top object-cover" alt="Course Image">
+          <div class="card-body">
+            <h4 class="fw-bold mb-3 text-primary">Course Overview</h4>
+            <p class="text-muted">{{ course.details }}</p>
+
+            <!-- Collapsible Syllabus -->
+            <div class="accordion mt-4" id="syllabusAccordion">
+              <div class="accordion-item" *ngFor="let module of ['Introduction','Programming Basics','Algorithms','Final Project']; let i = index">
+                <h2 class="accordion-header" id="heading{{i}}">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+i">
+                    Module {{ i+1 }}: {{ module }}
+                  </button>
+                </h2>
+                <div [id]="'collapse'+i" class="accordion-collapse collapse" [class.show]="i===0" data-bs-parent="#syllabusAccordion">
+                  <div class="accordion-body">
+                    Content for <strong>{{ module }}</strong> goes here. You can expand this with topics and lessons.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professor Card -->
+        <div class="card shadow-sm border-0 p-4 mb-4">
+          <div class="d-flex align-items-center">
+            <img src="https://i.pravatar.cc/100?img=12" class="rounded-circle me-3 shadow" width="70" height="70" alt="Professor">
+            <div>
+              <h5 class="mb-0">{{ course.professor }}</h5>
+              <small class="text-muted">Course Instructor</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="col-lg-4">
+        <div class="card shadow-lg border-0 p-4 sticky-top" style="top: 90px;">
+          <h3 class="fw-bold text-success mb-3">$ {{ course.price }}</h3>
+          <button class="btn btn-primary w-100 mb-2">Enroll Now</button>
+          <button class="btn btn-outline-secondary w-100 mb-2">Save for Later</button>
+          <button class="btn btn-outline-dark w-100">Share</button>
+          <hr>
+          <p><strong>Max Students:</strong> {{ course.maxStudents }}</p>
+          <p><strong>Contact:</strong> {{ course.contact }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Related Courses -->
+    <div class="mt-5">
+      <h4 class="fw-bold mb-4">Related Courses</h4>
+      <div class="row g-4">
+        <div class="col-md-4" *ngFor="let rel of [1,2,3]">
+          <div class="card shadow-sm border-0 h-100">
+            <img src="https://picsum.photos/400/200?random={{rel}}" class="card-img-top object-cover" alt="Related">
+            <div class="card-body">
+              <h6 class="fw-bold">Course {{ rel }}</h6>
+              <p class="text-muted small">Short description of related course {{ rel }}.</p>
+              <button class="btn btn-sm btn-outline-primary">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

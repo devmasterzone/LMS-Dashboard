@@ -1,0 +1,89 @@
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="'College Time Table'" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <div class="card p-4 mt-4 radius">
+
+    <!-- Filters -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label class="form-label">Department</label>
+        <select class="form-select" [(ngModel)]="selectedDepartment" (change)="filterTimeTable()">
+          <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Semester</label>
+        <select class="form-select" [(ngModel)]="selectedSemester" (change)="filterTimeTable()">
+          <option *ngFor="let sem of semesters" [value]="sem">{{ sem }}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Faculty</label>
+        <select class="form-select" [(ngModel)]="selectedFaculty" (change)="filterTimeTable()">
+          <option value="">All</option>
+          <option *ngFor="let staff of staffList" [value]="staff">{{ staff }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Time Table -->
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th *ngFor="let period of periods">{{ period }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of weekDays">
+            <td class="fw-bold">{{ day }}</td>
+            <td *ngFor="let slot of getSlots(day)">
+              <div *ngIf="slot; else freeSlot">
+                <div class="fw-semibold">{{ slot.subject }}</div>
+                <small class="text-muted">{{ slot.faculty }}</small><br />
+                <span class="badge bg-info">{{ slot.room }}</span>
+                <button class="btn btn-sm btn-outline-primary mt-1" (click)="editSlot(day, slot)">Edit</button>
+              </div>
+              <ng-template #freeSlot>
+                <span class="text-muted">Free</span>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Edit Slot Modal -->
+  <div class="modal fade" id="editSlotModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form (ngSubmit)="updateSlot()">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Time Slot</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <input type="text" class="form-control" [(ngModel)]="editData.subject" name="subject" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Faculty</label>
+              <input type="text" class="form-control" [(ngModel)]="editData.faculty" name="faculty" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Room</label>
+              <input type="text" class="form-control" [(ngModel)]="editData.room" name="room" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" type="submit">Save Changes</button>
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

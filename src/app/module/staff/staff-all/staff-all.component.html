@@ -1,1 +1,49 @@
-<p>staff-all works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <div class="card p-4 mt-4 radius">
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+    <div class="table-responsive">
+       <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Staff ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Designation</th>
+          <th>Qualification</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Joining Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let staff of staffList">
+          <td>{{ staff.staffId }}</td>
+          <td>{{ staff.name }}</td>
+          <td>{{ staff.department }}</td>
+          <td>{{ staff.designation }}</td>
+          <td>{{ staff.qualification }}</td>
+          <td>{{ staff.email }}</td>
+          <td>{{ staff.phone }}</td>
+          <td>{{ staff.joiningDate | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredStaff.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+  </div>
+</div>

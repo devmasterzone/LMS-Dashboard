@@ -1,1 +1,104 @@
-<p>student-add works!</p>
+<app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+<div class="card p-4">
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <!-- First Name -->
+      <div class="col-md-6">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name" />
+      </div>
+
+      <!-- Last Name -->
+      <div class="col-md-6">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Enter Last Name" />
+      </div>
+
+      <!-- Roll Number -->
+      <div class="col-md-6">
+        <label class="form-label">Roll Number</label>
+        <input type="text" class="form-control" formControlName="rollNumber" placeholder="e.g. 21CS001" />
+      </div>
+
+      <!-- Email -->
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="example@domain.com" />
+      </div>
+
+      <!-- Joining Date -->
+      <div class="col-md-6">
+        <label class="form-label">Joining Date</label>
+        <input type="date" class="form-control" formControlName="joiningDate" />
+      </div>
+
+      <!-- Password & Confirm Password (same logic as before) -->
+      <!-- ... -->
+
+      <!-- Mobile -->
+      <div class="col-md-6">
+        <label class="form-label">Mobile Number</label>
+        <input type="text" class="form-control" formControlName="mobile" placeholder="+91 9876543210" />
+      </div>
+
+      <!-- Gender -->
+      <div class="col-md-6">
+        <label class="form-label">Gender</label>
+        <select class="form-select" formControlName="gender">
+          <option disabled selected value="">Choose Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Course -->
+      <div class="col-md-6">
+        <label class="form-label">Course</label>
+        <input type="text" class="form-control" formControlName="course" placeholder="e.g. B.Tech" />
+      </div>
+
+      <!-- Year -->
+      <div class="col-md-6">
+        <label class="form-label">Year</label>
+        <select class="form-select" formControlName="year">
+          <option disabled selected value="">Select Year</option>
+          <option>1st Year</option>
+          <option>2nd Year</option>
+          <option>3rd Year</option>
+          <option>4th Year</option>
+        </select>
+      </div>
+
+      <!-- Section -->
+      <div class="col-md-6">
+        <label class="form-label">Section</label>
+        <input type="text" class="form-control" formControlName="section" placeholder="e.g. A" />
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="col-md-6">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" formControlName="dob" />
+      </div>
+
+      <!-- Education -->
+      <div class="col-md-6">
+        <label class="form-label">Education</label>
+        <input type="text" class="form-control" formControlName="education" placeholder="Education Qualification" />
+      </div>
+
+      <!-- Profile Upload -->
+      <div class="col-md-6">
+        <label class="form-label">Upload Profile</label>
+        <input type="file" class="form-control" formControlName="profile" />
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-4 d-flex justify-content-center gap-2">
+      <button type="submit" class="btn btn-submit" [disabled]="studentForm.invalid">Submit</button>
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

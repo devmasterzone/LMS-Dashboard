@@ -1,1 +1,49 @@
-<p>departments-all works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+  <div class="card p-4 mt-4 radius">
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+    <div class="table-responsive">
+        <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th>Department ID</th>
+        <th>Department Name</th>
+        <th>Head of Department (HOD)</th>
+        <th>Total Faculty</th>
+        <th>Total Students</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for (dept of paginatedDepartments; track dept.id) {
+      <tr>
+        <td>{{ dept.id }}</td>
+        <td>{{ dept.name }}</td>
+        <td>{{ dept.hod }}</td>
+        <td>{{ dept.facultyCount }}</td>
+        <td>{{ dept.studentCount }}</td>
+      </tr>
+    }
+  </tbody>
+
+  </table>
+    </div>
+    <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredDepartments.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+    
+  </div>
+</div>
+
+

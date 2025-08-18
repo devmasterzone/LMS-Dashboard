@@ -1,1 +1,45 @@
-<p>holiday-list works!</p>
+<div class="page-wrapper">
+
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+  
+  <div class="card p-3 radius">
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+    <div class="table-responsive">
+          <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Holiday Name</th>
+          <th>Date</th>
+          <th>Day</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let holiday of paginatedHolidays; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ holiday.name }}</td>
+          <td>{{ holiday.date }}</td>
+          <td>{{ holiday.day }}</td>
+          <td>{{ holiday.category }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredHolidays.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+  </div>
+</div>

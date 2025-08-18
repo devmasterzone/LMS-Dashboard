@@ -1,0 +1,20 @@
+mat-card {
+  max-width: 800px;
+  margin: auto;
+  border-radius: 15px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.overdue {
+  border: 2px solid red;
+  border-radius: 4px;
+}

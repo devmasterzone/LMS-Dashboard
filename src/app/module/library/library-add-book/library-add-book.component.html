@@ -1,1 +1,120 @@
-<p>library-add-book works!</p>
+<div class="page-wrapper">
+  <div class="card p-4 mt-4 radius shadow-lg">
+    <h3 class="mb-4 text-primary fw-bold">
+      <i class="bi bi-journal-plus me-2"></i> Add New Book
+    </h3>
+
+    <!-- ✅ Success Alert -->
+    <div *ngIf="showSuccess" class="alert alert-success">
+      ✅ Book has been successfully saved!
+    </div>
+
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="row g-4">
+        
+        <!-- Left Column -->
+        <div class="col-md-6">
+          <!-- Title -->
+          <div class="mb-3">
+            <label class="form-label">Book Title</label>
+            <input type="text" class="form-control" formControlName="title" placeholder="Enter book title" />
+            <small class="text-danger" *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.invalid">
+              Title is required (max 150 chars).
+            </small>
+          </div>
+
+          <!-- Author -->
+          <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" formControlName="author" placeholder="Enter author name" />
+            <small class="text-danger" *ngIf="bookForm.get('author')?.touched && bookForm.get('author')?.invalid">
+              Author is required (max 100 chars).
+            </small>
+          </div>
+
+          <!-- ISBN -->
+          <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input type="text" class="form-control" formControlName="isbn" placeholder="978-1234567890" />
+            <small class="text-danger" *ngIf="bookForm.get('isbn')?.touched && bookForm.get('isbn')?.invalid">
+              ISBN is required (10–20 digits, may include hyphen).
+            </small>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" formControlName="category">
+              <option value="">Select category</option>
+              <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+            </select>
+            <small class="text-danger" *ngIf="bookForm.get('category')?.touched && bookForm.get('category')?.invalid">
+              Please select a category.
+            </small>
+          </div>
+
+          <!-- Genre -->
+          <div class="mb-3">
+            <label class="form-label">Genre</label>
+            <select class="form-select" formControlName="genre">
+              <option value="">Select genre</option>
+              <option *ngFor="let g of genres" [value]="g">{{ g }}</option>
+            </select>
+            <small class="text-danger" *ngIf="bookForm.get('genre')?.touched && bookForm.get('genre')?.invalid">
+              Please select a genre.
+            </small>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-6">
+          <!-- Copies -->
+          <div class="mb-3">
+            <label class="form-label">Available Copies</label>
+            <input type="number" class="form-control" formControlName="copiesAvailable" />
+            <small class="text-danger" *ngIf="bookForm.get('copiesAvailable')?.touched && bookForm.get('copiesAvailable')?.invalid">
+              Must be 0 or more.
+            </small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Total Copies</label>
+            <input type="number" class="form-control" formControlName="totalCopies" />
+            <small class="text-danger" *ngIf="bookForm.get('totalCopies')?.touched && bookForm.get('totalCopies')?.invalid">
+              Must be at least 1.
+            </small>
+          </div>
+
+          <!-- Date -->
+          <div class="mb-3">
+            <label class="form-label">Date Added</label>
+            <input type="date" class="form-control" formControlName="addedDate" />
+            <small class="text-danger" *ngIf="bookForm.get('addedDate')?.touched && bookForm.get('addedDate')?.invalid">
+              Date is required.
+            </small>
+          </div>
+
+          <!-- Cover Upload -->
+          <div class="mb-3">
+            <label class="form-label">Cover Image</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" />
+            <small class="text-danger" *ngIf="bookForm.get('coverImage')?.touched && bookForm.get('coverImage')?.invalid">
+              Please upload a cover image.
+            </small>
+            <div class="mt-3 text-center" *ngIf="previewUrl">
+              <img [src]="previewUrl" alt="Cover Preview" class="img-fluid rounded shadow" style="max-height: 200px;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end mt-3">
+        <button type="button" class="btn btn-secondary me-2" (click)="onReset()">Reset</button>
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-save me-1"></i> Save Book
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

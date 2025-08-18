@@ -1,48 +1,85 @@
-<div class="container">
+<div class="profile-wrapper">
 
-    <!-- Profile Card -->
-    <div class="card profile">
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Profile">
-        <h3>John Doe</h3>
-        <p>Full Stack Developer</p>
-        <p>Bay Area, San Francisco, CA</p>
-        <div class="buttons">
-            <button class="btn-follow">Follow</button>
-            <button class="btn-message">Message</button>
-        </div>
-        <div class="social-links">
-            <a href="#"><i class="fa-solid fa-globe"></i> https://bootdey.com</a>
-            <a href="#"><i class="fa-solid fa-code"></i> bootdey</a>
-            <a href="#"><i class="fa-solid fa-at"></i> @bootdey</a>
-            <a href="#"><i class="fa-brands fa-github"></i> GitHub</a>
-            <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
-            <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
-        </div>
+  <!-- Cover / Header -->
+  <div class="cover">
+    <div class="avatar">
+      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Profile">
+    </div>
+    <h2>Dr. John Doe</h2>
+    <p class="title">Professor of Computer Science • AI & Data Science</p>
+    <div class="action-buttons">
+      <button class="btn-follow"><i class="fa-solid fa-user-plus"></i> Follow</button>
+      <button class="btn-message"><i class="fa-solid fa-envelope"></i> Message</button>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="container">
+
+    <!-- Left: Info -->
+    <!-- <div class="card profile-info">
+      <h4>Contact Info</h4>
+      <p><i class="fa-solid fa-envelope"></i> johndoe@university.edu</p>
+      <p><i class="fa-solid fa-phone"></i> (239) 816-9029</p>
+      <p><i class="fa-solid fa-location-dot"></i> Bay Area, San Francisco</p>
+      <button class="edit-btn">Edit Profile</button>
+    </div> -->
+    <div class="card profile-info">
+      <h4>Contact Info</h4>
+      <p><i class="fa-solid fa-user"></i> <strong>Full Name:</strong> John Doe</p>
+      <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> johndoe@university.edu</p>
+      <p><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> (239) 816-9029</p>
+      <p><i class="fa-solid fa-location-dot"></i> <strong>Address:</strong> Bay Area, San Francisco</p>
+      <button class="edit-btn">Edit Profile</button>
+
+      <h4>Social Links</h4>
+      <div class="social-links">
+        <a href="#"><i class="fa-solid fa-globe"></i> Website</a>
+        <a href="#"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
     </div>
 
-    <!-- Info Card -->
-    <div class="card info">
-        <h4>Contact Info</h4>
-        <p><strong>Full Name:</strong> Kenneth Valdez</p>
-        <p><strong>Email:</strong> fip@jukmuh.al</p>
-        <p><strong>Phone:</strong> (239) 816-9029</p>
-        <p><strong>Address:</strong> Bay Area, San Francisco, CA</p>
-        <button class="edit-btn">Edit</button>
+    <!-- Right: Tabs -->
+    <div class="card profile-content">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button [class.active]="activeTab === 'overview'" (click)="setTab('overview')">
+          <mat-icon>person</mat-icon> Overview
+        </button>
+        <button [class.active]="activeTab === 'courses'" (click)="setTab('courses')">
+          <mat-icon>book</mat-icon> Courses
+        </button>
+        <button [class.active]="activeTab === 'reviews'" (click)="setTab('reviews')">
+          <mat-icon>rate_review</mat-icon> Reviews
+        </button>
+      </div>
 
-        <h4>Project Status</h4>
-        <div class="status-item">
-            <span>Website Markup - 78%</span>
-            <div class="progress-bar"><div class="progress blue" style="width:78%"></div></div>
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <div *ngIf="activeTab === 'overview'">
+          <h3>About Professor</h3>
+          <p>
+            Dr. John Smith is a passionate educator with 15+ years of teaching experience in
+            Computer Science fundamentals and AI.
+          </p>
         </div>
-        <div class="status-item">
-            <span>Mobile Template - 86%</span>
-            <div class="progress-bar"><div class="progress orange" style="width:86%"></div></div>
+
+        <div *ngIf="activeTab === 'courses'">
+          <h3>Courses Taught</h3>
+          <ul>
+            <li>Computer Science Fundamentals (CS101)</li>
+            <li>Data Structures & Algorithms</li>
+          </ul>
         </div>
-        <div class="status-item">
-            <span>Backend API - 62%</span>
-            <div class="progress-bar"><div class="progress green" style="width:62%"></div></div>
+
+        <div *ngIf="activeTab === 'reviews'">
+          <h3>Student Reviews</h3>
+          <p>⭐️⭐️⭐️⭐️☆ (4.5 / 5)</p>
+          <p>"Great mentor and very approachable!"</p>
         </div>
+      </div>
     </div>
-
+  </div>
 </div>

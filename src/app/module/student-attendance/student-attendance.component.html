@@ -1,0 +1,106 @@
+<div class="page-wrapper">
+   <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <!-- Filters -->
+  <div class="filters card p-3 mb-3">
+    <div class="row g-3">
+      <div class="col-md-2">
+        <select class="form-select" [(ngModel)]="filterClass" (change)="applyFilters()">
+          <option value="All">All Classes</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <select class="form-select" [(ngModel)]="filterSection" (change)="applyFilters()">
+          <option value="All">All Sections</option>
+          <option value="A">Section A</option>
+          <option value="B">Section B</option>
+          <option value="C">Section C</option>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <select class="form-select" [(ngModel)]="filterStatus" (change)="applyFilters()">
+          <option value="All">All Status</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+        </select>
+      </div>
+
+      <div class="col-md-3 d-flex gap-2">
+        <input type="date" class="form-control" [(ngModel)]="startDate" (change)="applyFilters()" />
+        <input type="date" class="form-control" [(ngModel)]="endDate" (change)="applyFilters()" />
+      </div>
+    </div>
+  </div>
+
+ 
+  <!-- Attendance Table -->
+  <div class="card p-4 mt-4 radius">
+     <!-- Export Buttons -->
+  <div class="d-flex justify-content-end mb-3 gap-2">
+    <button class="btn btn-success" (click)="exportToExcel()">⬇️ Export Excel</button>
+    <button class="btn btn-danger" (click)="exportToPDF()">⬇️ Export PDF</button>
+  </div>
+
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Section</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of paginatedAttendence">
+          <td>{{ student.rollNo }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.class }}</td>
+          <td>{{ student.section }}</td>
+          <td>{{ student.date }}</td>
+          <td>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': student.status === 'Present',
+                    'bg-danger': student.status === 'Absent',
+                    'bg-warning text-dark': student.status === 'Late'
+                  }">
+              {{ student.status }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="paginatedList.length === 0">
+          <td colspan="6" class="text-center">No records found</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+     <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredAttendence.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+
+
+  </div>
+</div>

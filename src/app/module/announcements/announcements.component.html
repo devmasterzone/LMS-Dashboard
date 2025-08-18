@@ -1,0 +1,50 @@
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <!-- Filters -->
+   <div>
+      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <input 
+      type="text" 
+      class="form-control w-50" 
+      placeholder="Search announcements..." 
+      [(ngModel)]="searchTerm"
+      (input)="filterAnnouncements()" />
+
+    <select class="form-select w-25" [(ngModel)]="filterCategory" (change)="filterAnnouncements()">
+      <option value="All">All Categories</option>
+      <option value="General">General</option>
+      <option value="Exam">Exam</option>
+      <option value="Event">Event</option>
+      <option value="Holiday">Holiday</option>
+    </select>
+  </div>
+
+  <!-- Announcements List -->
+  <div class="row">
+    <div class="col-md-6 mb-4" *ngFor="let ann of filteredAnnouncements">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ ann.title }}
+            <span class="{{ getCategoryClass(ann.category) }}">{{ ann.category }}</span>
+          </h5>
+          <p class="card-text">{{ ann.message }}</p>
+          <p class="text-muted mb-1">
+            <small>📅 {{ ann.date | date:'longDate' }}</small>
+          </p>
+          <p class="text-muted">
+            <small>👤 Posted by {{ ann.postedBy }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results -->
+  <div *ngIf="filteredAnnouncements.length === 0" class="text-center mt-4">
+    <p class="text-muted">No announcements found.</p>
+  </div>
+   </div>
+
+</div>

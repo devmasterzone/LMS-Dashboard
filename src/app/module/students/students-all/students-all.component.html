@@ -1,1 +1,76 @@
-<p>students-all works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <div class="card p-4 mt-4 radius">
+
+    <!-- Header Component -->
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addStudentUrl"
+    ></app-table-header>
+
+    <!-- Student Table -->
+     <div class="table-responsive">
+      <table class="table">
+      <thead>
+        <tr>
+          <th class="table-header-cell">Profile</th>
+          <th class="table-header-cell">Roll No.</th>
+          <th class="table-header-cell">Name</th>
+          <th class="table-header-cell">Gender</th>
+          <th class="table-header-cell">Class</th>
+          <th class="table-header-cell">Mobile</th>
+          <th class="table-header-cell">Email</th>
+          <th class="table-header-cell">Admission Date</th>
+          <th class="table-header-cell">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of paginatedStudents">
+          <td class="table-data-cell">
+            <img
+              [src]="student.profile"
+              alt="profile"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </td>
+          <td class="table-data-cell">{{ student.rollNo }}</td>
+          <td class="table-data-cell">{{ student.name }}</td>
+          <td class="table-data-cell">{{ student.gender }}</td>
+          <td class="table-data-cell">{{ student.class }}</td>
+          <td class="table-data-cell">{{ student.mobile }}</td>
+          <td class="table-data-cell">{{ student.email }}</td>
+          <td class="table-data-cell">{{ student.admissionDate }}</td>
+          <td class="table-data-cell">
+            <div class="d-flex">
+              <button class="btn btn-sm btn-primary iconbtn me-2" (click)="editStudent(student)">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="btn btn-sm btn-danger iconbtn" (click)="confirmDelete(student)">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+     </div>
+    
+
+    <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredStudents.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+
+  </div>
+</div>

@@ -1,1 +1,80 @@
-<p>courses-all works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <div class="card p-4 mt-4 radius">
+
+    <!-- Header Component -->
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addCourseUrl"
+    ></app-table-header>
+
+    <!-- Courses Table -->
+     <div class="table-responsive">
+      <table class="table">
+      <thead>
+        <tr>
+          <th class="table-header-cell">Course Photo</th>
+          <th class="table-header-cell">Course Code</th>
+          <th class="table-header-cell">Course Name</th>
+          <th class="table-header-cell">Course Details</th>
+          <th class="table-header-cell">Start Form</th>
+          <th class="table-header-cell">Course Duration</th>
+          <th class="table-header-cell">Course Price</th>
+          <th class="table-header-cell">Professor Name</th>
+          <th class="table-header-cell">Maximum Students</th>
+          <th class="table-header-cell">Contact Number</th>
+          <th class="table-header-cell">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of paginatedCourses">
+          <td class="table-data-cell">
+            <img
+              [src]="course.photo"
+              alt="course"
+              class="rounded-circle"
+              width="40"
+              height="40"
+            />
+          </td>
+          <td class="table-data-cell">{{ course.code }}</td>
+          <td class="table-data-cell">{{ course.name }}</td>
+          <td class="table-data-cell">{{ course.details }}</td>
+          <td class="table-data-cell">{{ course.startFrom }}</td>
+          <td class="table-data-cell">{{ course.duration }}</td>
+          <td class="table-data-cell">{{ course.price | currency }}</td>
+          <td class="table-data-cell">{{ course.professor }}</td>
+          <td class="table-data-cell">{{ course.maxStudents }}</td>
+          <td class="table-data-cell">{{ course.contact }}</td>
+          <td class="table-data-cell">
+            <div class="d-flex">
+              <button class="btn btn-sm btn-primary iconbtn me-2" (click)="editCourse(course)">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="btn btn-sm btn-danger iconbtn" (click)="confirmDelete(course)">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+     </div>
+    
+
+    <!-- Footer Component -->
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredCourses.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+
+  </div>
+</div>

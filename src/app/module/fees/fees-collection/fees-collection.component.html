@@ -1,1 +1,66 @@
-<p>fees-collection works!</p>
+<div class="page-wrapper">
+  <app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+  <div class="card p-4 mt-4 radius">
+    <app-table-header
+      [(searchTerm)]="searchTerm"
+      [pageSizeOptions]="pageSizeOptions"
+      [(pageSize)]="pageSize"
+      (pageSizeChange)="onPageSizeChange()"
+      (searchChange)="onSearchChange()"
+      [routeurl]="addBookUrl"
+    ></app-table-header>
+    <div class="table-responsive">
+      <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>Sr. No</th>
+          <th>Student Name</th>
+          <th>Roll No</th>
+          <th>Department</th>
+          <th>Tuition Fees (₹)</th>
+          <th>Exam Fees (₹)</th>
+          <th>Library Fees (₹)</th>
+          <th>Total (₹)</th>
+          <th>Paid Amount (₹)</th>
+          <th>Pending Amount (₹)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fee of feesList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ fee.studentName }}</td>
+          <td>{{ fee.rollNo }}</td>
+          <td>{{ fee.department }}</td>
+          <td>{{ fee.tuition }}</td>
+          <td>{{ fee.exam }}</td>
+          <td>{{ fee.library }}</td>
+          <td>{{ fee.total }}</td>
+          <td>{{ fee.paidAmount }}</td>
+          <td>{{ fee.total - fee.paidAmount }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-success': fee.status === 'Paid',
+                'bg-warning text-dark': fee.status === 'Partial',
+                'bg-danger': fee.status === 'Unpaid'
+              }"
+            >
+              {{ fee.status }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <app-table-footer
+      [currentPage]="currentPage"
+      [pageSize]="pageSize"
+      [totalItems]="filteredFess.length"
+      [totalPages]="totalPages"
+      (pageChange)="changePage($event)"
+    ></app-table-footer>
+  </div>
+</div>

@@ -20,6 +20,9 @@ export class TableHeaderComponent {
   @Output() pageSizeChange = new EventEmitter<number>();
   @Output() searchTermChange = new EventEmitter<string>();
 
+  @Input() showAddButton: boolean = true; // default true
+
+
   constructor(private router: Router) {}
    goToAddPage(): void {
     if (this.routeurl) {
