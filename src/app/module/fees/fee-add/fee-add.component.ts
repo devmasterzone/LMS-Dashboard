@@ -10,6 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CustomSelectComponent } from '../../../shared/components/custom-select/custom-select.component';
 
 @Component({
   selector: 'app-fee-add',
@@ -24,18 +25,35 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CustomSelectComponent
   ],
   templateUrl: './fee-add.component.html',
   styleUrl: './fee-add.component.scss'
 })
 export class FeeAddComponent {
+
+  chosenCategory: string | null = null;
+
   feeForm: FormGroup;
   students: string[] = ['Alice Johnson', 'Bob Smith', 'Charlie Brown', 'David Lee'];
   filteredStudents: string[] = [];
 
-  departments: string[] = ['Computer Science', 'Mechanical', 'Civil', 'Electrical', 'Electronics'];
-  feeTypes: string[] = ['Tuition Fee', 'Exam Fee', 'Library Fee', 'Hostel Fee'];
+  departments = [
+  { value: 'COMPUTER_SCIENCE', label: 'Computer Science' },
+  { value: 'MECHANICAL', label: 'Mechanical' },
+  { value: 'CIVIL', label: 'Civil' },
+  { value: 'ELECTRICAL', label: 'Electrical' },
+  { value: 'ELECTRONICS', label: 'Electronics' }
+];
+
+feeTypes = [
+  { value: 'TUITION_FEE', label: 'Tuition Fee' },
+  { value: 'EXAM_FEE', label: 'Exam Fee' },
+  { value: 'LIBRARY_FEE', label: 'Library Fee' },
+  { value: 'HOSTEL_FEE', label: 'Hostel Fee' }
+];
+
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
     this.feeForm = this.fb.group({
@@ -73,4 +91,8 @@ export class FeeAddComponent {
   onReset() {
     this.feeForm.reset({ status: 'Pending' });
   }
+
+
+
+  
 }

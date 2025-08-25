@@ -1,13 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-student-profile',
-  imports: [CommonModule],
+  imports: [CommonModule,BreadcrumbComponent],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.scss'
 })
 export class StudentProfileComponent {
+  pageTitle = 'Student Profile';
+   breadcrumbs = [
+    { label: 'Home', url: '/' },
+    { label: 'Student', url: '/Student' },
+    { label: 'Profile', url: '/Student/profile' }
+  ];
+Number(arg0: string) {
+throw new Error('Method not implemented.');
+}
 activeTab: string = 'overview';
 
   student = {
@@ -36,7 +46,9 @@ activeTab: string = 'overview';
     this.activeTab = tab;
   }
 
-  getAttendancePercent(attended: number, total: number) {
-    return ((attended / total) * 100).toFixed(1);
-  }
+  getAttendancePercent(attended: number, total: number): number {
+  if (!total || total === 0) return 0;
+  return Math.round((attended / total) * 100);
+}
+
 }

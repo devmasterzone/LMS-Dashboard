@@ -32,97 +32,120 @@
 
       <!-- Staff Details -->
       <div class="col-md-9">
-        <!-- Tabs -->
-        <ul class="nav nav-tabs mb-3" id="profileTabs">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#documents">Documents</a>
-          </li>
-        </ul>
+         <div class="profile-tabs glass">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button [class.active]="activeTab === 'about'" (click)="setTab('about')">
+        <mat-icon>person</mat-icon> About 
+      </button>
+      <button [class.active]="activeTab === 'exprience'" (click)="setTab('exprience')">
+        <mat-icon>book</mat-icon> Experience
+      </button>
+      <button [class.active]="activeTab === 'documents'" (click)="setTab('documents')">
+        <mat-icon>rate_review</mat-icon>  Documents
+      </button>
+    </div>
 
-        <div class="tab-content">
-          <!-- About Section -->
-          <div class="tab-pane fade show active" id="about">
-            <h5 class="mb-3">Personal Information</h5>
-            <table class="table table-bordered">
-              <tbody>
-                <tr>
-                  <th>Staff ID</th>
-                  <td>{{ staff.staffId }}</td>
-                </tr>
-                <tr>
-                  <th>Email</th>
-                  <td>{{ staff.email }}</td>
-                </tr>
-                <tr>
-                  <th>Phone</th>
-                  <td>{{ staff.phone }}</td>
-                </tr>
-                <tr>
-                  <th>Department</th>
-                  <td>{{ staff.department }}</td>
-                </tr>
-                <tr>
-                  <th>Joining Date</th>
-                  <td>{{ staff.joiningDate }}</td>
-                </tr>
-              </tbody>
-            </table>
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <div *ngIf="activeTab === 'about'" class="fade-in">
+  <div class="about-card glass p-4 shadow-lg rounded-4">
+    <h4 class="fw-bold mb-4 text-gradient">👤 Staff Information</h4>
 
-            <h5 class="mt-4 mb-3">Address</h5>
-            <p class="text-muted"><i class="bi bi-house"></i> {{ staff.address }}</p>
+    <table class="table align-middle premium-table">
+      <tbody>
+        <tr>
+          <th><i class="bi bi-hash text-info me-2"></i> Staff ID</th>
+          <td>{{ staff.staffId }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-envelope text-primary me-2"></i> Email</th>
+          <td>{{ staff.email }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-telephone text-success me-2"></i> Phone</th>
+          <td>{{ staff.phone }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-diagram-3 text-warning me-2"></i> Department</th>
+          <td>{{ staff.department }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-calendar-check text-danger me-2"></i> Joining Date</th>
+          <td>{{ staff.joiningDate }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-cake text-pink me-2"></i> DOB</th>
+          <td>{{ staff.dob }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-gender-ambiguous text-purple me-2"></i> Gender</th>
+          <td>{{ staff.gender }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-heart text-danger me-2"></i> Marital Status</th>
+          <td>{{ staff.maritalStatus }}</td>
+        </tr>
+        <tr>
+          <th><i class="bi bi-geo-alt text-secondary me-2"></i> Address</th>
+          <td>{{ staff.address }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+      <div *ngIf="activeTab === 'exprience'" class="fade-in">
+                <ul class="timeline">
+        <li>
+          <div class="timeline-badge bg-primary"><i class="bi bi-mortarboard"></i></div>
+          <div class="timeline-panel">
+            <h6>Lab Assistants <span class="text-muted small"> - Computer Science Dept.</span></h6>
+            <p class="text-muted">2021 - Present</p>
           </div>
-
-          <!-- Experience Section -->
-          <div class="tab-pane fade" id="experience">
-            <h5 class="mb-3">Experience</h5>
-            <ul class="timeline">
-              <li>
-                <strong>Assistant Professor</strong> - Computer Science Dept.
-                <span class="text-muted d-block">2021 - Present</span>
-              </li>
-              <li>
-                <strong>Lecturer</strong> - IT Dept.
-                <span class="text-muted d-block">2018 - 2021</span>
-              </li>
-              <li>
-                <strong>Research Scholar</strong> - IIT Delhi
-                <span class="text-muted d-block">2015 - 2018</span>
-              </li>
-            </ul>
+        </li>
+        <li>
+          <div class="timeline-badge bg-success"><i class="bi bi-journal-bookmark"></i></div>
+          <div class="timeline-panel">
+            <h6>Lab Assistants<span class="text-muted small"> - IT Dept.</span></h6>
+            <p class="text-muted">2018 - 2021</p>
           </div>
-
-          <!-- Documents Section -->
-          <div class="tab-pane fade" id="documents">
-            <h5 class="mb-3">Uploaded Documents</h5>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between">
-                <span><i class="bi bi-file-earmark-pdf text-danger"></i> Resume.pdf</span>
-                <button class="btn btn-sm btn-outline-primary">Download</button>
-              </li>
-              <li class="list-group-item d-flex justify-content-between">
-                <span><i class="bi bi-file-earmark-text text-success"></i> JoiningLetter.docx</span>
-                <button class="btn btn-sm btn-outline-primary">Download</button>
-              </li>
-            </ul>
+        </li>
+        <li>
+          <div class="timeline-badge bg-warning"><i class="bi bi-lightbulb"></i></div>
+          <div class="timeline-panel">
+            <h6>Research Scholar <span class="text-muted small"> - IIT Delhi</span></h6>
+            <p class="text-muted">2015 - 2018</p>
           </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="mt-4">
-          <button class="btn btn-primary me-2">
-            <i class="bi bi-pencil-square"></i> Edit Profile
-          </button>
-          <button class="btn btn-danger">
-            <i class="bi bi-trash"></i> Delete Profile
-          </button>
-        </div>
+        </li>
+      </ul>
       </div>
+
+      <div *ngIf="activeTab === 'documents'" class="fade-in">
+        <div class="doc-card d-flex justify-content-between align-items-center p-3 shadow-sm rounded">
+            <span><i class="bi bi-file-earmark-pdf text-danger fs-4 me-2"></i> Resume.pdf</span>
+            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-download me-1"></i> Download</button>
+          </div>
+          <div class="doc-card d-flex justify-content-between align-items-center p-3 shadow-sm rounded mt-4">
+            <span><i class="bi bi-file-earmark-text text-success fs-4 me-2"></i> JoiningLetter.docx</span>
+            <button class="btn btn-sm btn-outline-primary"><i class="bi bi-download me-1"></i> Download</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- Action Buttons -->
+  <div class="mt-4 d-flex">
+    <button class="btn btn-primary me-2">
+      <i class="bi bi-pencil-square me-1"></i> Edit Profile
+    </button>
+    <button class="btn btn-danger">
+      <i class="bi bi-trash me-1"></i> Delete Profile
+    </button>
+  </div>
+</div>
+
     </div>
   </div>
 </div>

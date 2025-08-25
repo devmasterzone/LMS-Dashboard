@@ -1,0 +1,25 @@
+<div class="dropdown-container" (clickOutside)="closeDropdown()">
+  <label class="dropdown-label">{{ label }}</label>
+
+  <button class="select-button" (click)="toggleDropdown()" type="button">
+    <span class="selected-text"
+          [class.placeholder]="!selectedValue">
+      {{ selectedLabel }}
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon">
+      <path d="M5.293 7.293a1 1 0 011.414 0L10 
+        10.586l3.293-3.293a1 1 0 
+        111.414 1.414l-4 4a1 1 0 01-1.414 
+        0l-4-4a1 1 0 010-1.414z"/>
+    </svg>
+  </button>
+
+  <div class="dropdown-content" [class.show]="dropdownOpen">
+    <div *ngFor="let opt of options" 
+         class="option" 
+         [class.active]="opt.value === selectedValue"
+         (click)="selectOption(opt)">
+      {{ opt.label }}
+    </div>
+  </div>
+</div>

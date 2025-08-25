@@ -1,15 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BreadcrumbComponent } from '../../../shared/breadcrumb/breadcrumb.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-staff-profile',
-  imports: [CommonModule, BreadcrumbComponent],
+  imports: [CommonModule, BreadcrumbComponent,MatIconModule],
   templateUrl: './staff-profile.component.html',
   styleUrl: './staff-profile.component.scss'
 })
 export class StaffProfileComponent {
  pageTitle = 'Staff Profile';
+ activeTab: string = 'about';
+ setTab(tab: string) {
+    this.activeTab = tab;
+  }
   breadcrumbs = [
     { label: 'Home', url: '/' },
     { label: 'Staff', url: '/staff' },
@@ -19,13 +24,17 @@ export class StaffProfileComponent {
   staff = {
     staffId: 'STF12345',
     name: 'Dr. Ananya Sharma',
-    designation: 'Assistant Professor',
+    designation: 'Lab Assistants',
     email: 'ananya.sharma@college.edu',
     phone: '+91 9876543210',
     department: 'Computer Science',
     joiningDate: '2021-08-15',
     address: 'Flat 12B, Green Residency, Nagpur, Maharashtra, India',
-    photo: 'https://randomuser.me/api/portraits/women/44.jpg'
+    photo: 'https://randomuser.me/api/portraits/women/44.jpg',
+    gender:'Female',
+    dob:'1988-09-30',
+    maritalStatus:'Married'
+
   };
 
   constructor() {}

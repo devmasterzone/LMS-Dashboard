@@ -11,28 +11,212 @@
     font-size: 0.9rem;
   }
 
-  .timeline {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  // .timeline {
+  //   list-style: none;
+  //   padding: 0;
+  //   margin: 0;
 
-    li {
-      padding: 0.5rem 0;
-      border-left: 3px solid #0d6efd;
-      padding-left: 1rem;
-      margin-left: 1rem;
-      position: relative;
+  //   li {
+  //     padding: 0.5rem 0;
+  //     border-left: 3px solid #0d6efd;
+  //     padding-left: 1rem;
+  //     margin-left: 1rem;
+  //     position: relative;
 
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0.6rem;
-        left: -0.65rem;
-        width: 12px;
-        height: 12px;
-        background: #0d6efd;
-        border-radius: 50%;
-      }
-    }
-  }
+  //     &:before {
+  //       content: "";
+  //       position: absolute;
+  //       top: 1rem;
+  //       left: -0.45rem;
+  //       width: 12px;
+  //       height: 12px;
+  //       background: #0d6efd;
+  //       border-radius: 50%;
+  //     }
+  //   }
+  // }
 }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+.tabs button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+.tabs button.active {
+  color: #1976d2;
+  border-bottom: 3px solid #1976d2;
+  font-weight: 600;
+}
+.tabs button:hover {
+  color: #1976d2;
+}
+
+/* Tab Content */
+.tab-content {
+  font-size: 15px;
+  color: #444;
+  animation: fadeIn 0.5s ease;
+}
+.styled-list li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.section-title {
+  font-weight: 600;
+  border-left: 4px solid #007bff;
+  padding-left: 10px;
+  margin-bottom: 15px;
+  color: #333;
+  width: fit-content;
+}
+.custom-table th {
+  width: 180px;
+  background: #f8f9fa;
+  font-weight: 600;
+}
+.custom-table td {
+  color: #555;
+}
+/*about*/
+.about-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.premium-table th {
+  font-weight: 600;
+  color: #444;
+  width: 220px;
+  background: linear-gradient(90deg, #f8f9fc, #fff);
+  border-radius: 8px;
+}
+
+.premium-table td {
+  color: #333;
+  font-weight: 500;
+}
+
+.premium-table tr {
+  transition: all 0.3s ease-in-out;
+}
+
+.premium-table tr:hover {
+  background: rgba(115, 102, 255, 0.08);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  padding: 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #dee2e6;
+}
+.timeline li {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 60px;
+}
+.timeline-badge {
+    position: absolute;
+    left: 13px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10p;
+}
+.timeline-panel h6 {
+  margin: 0;
+  font-weight: 600;
+}
+.timeline-panel p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Document Cards */
+.doc-card {
+  background: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.doc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+
+/* Right Tabs Section */
+.profile-tabs {
+  flex: 1;
+  padding: 25px;
+  min-width: 300px;
+}
+
+
+
+/* Reviews */
+// .review-card {
+//   background: #fff;
+//   border-radius: 12px;
+//   padding: 15px;
+//   margin-bottom: 12px;
+//   box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+//   transition: transform 0.3s ease;
+// }
+// .review-card:hover {
+//   transform: translateY(-3px);
+// }
+// .review-card .rating {
+//   font-weight: bold;
+//   color: #ff9800;
+// }
+
+// /* Glassmorphism */
+// .glass {
+//   background: rgba(255,255,255,0.9);
+//   backdrop-filter: blur(14px);
+//   border-radius: 20px;
+//   // box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+// }
+
+// /* Animations */
+// .fade-in {
+//   animation: fadeIn 0.7s ease;
+// }
+// @keyframes fadeIn {
+//   from { opacity: 0; transform: translateY(10px); }
+//   to { opacity: 1; transform: translateY(0); }
+// }

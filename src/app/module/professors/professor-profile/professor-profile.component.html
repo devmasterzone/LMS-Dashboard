@@ -1,85 +1,184 @@
-<div class="profile-wrapper">
+<app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
 
-  <!-- Cover / Header -->
-  <div class="cover">
-    <div class="avatar">
-      <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Profile">
-    </div>
-    <h2>Dr. John Doe</h2>
-    <p class="title">Professor of Computer Science • AI & Data Science</p>
-    <div class="action-buttons">
-      <button class="btn-follow"><i class="fa-solid fa-user-plus"></i> Follow</button>
-      <button class="btn-message"><i class="fa-solid fa-envelope"></i> Message</button>
+<div class="profile-layout">
+
+<div class="profile-card glass">
+  <!-- Banner -->
+  <div class="profile-banner" [style.background]="professorProfile.banner">
+    <div class="overlay"></div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="avatar">
+    <img [src]="professorProfile.avatar" alt="Profile">
+  </div>
+
+  <!-- Name & Designation -->
+  <h2>
+    {{professorProfile.name}}
+    
+  </h2>
+  <div class="badge">{{professorProfile.designation}}</div>
+  <p class="title">{{professorProfile.title}}</p>
+
+  <!-- Stats Section -->
+  <div class="stats">
+    <div *ngFor="let stat of professorProfile.stats" class="stat-card">
+      <h3 [appCountUp]="stat.value" [duration]="2500"></h3>
+      <p>{{stat.label}}</p>
     </div>
   </div>
 
-  <!-- Body -->
-  <div class="container">
+  <!-- Contact Info -->
+  <div class="contact-info">
+    <h4><i class="fa-solid fa-id-card"></i> Contact Info</h4>
+    <p><i class="fa-solid fa-envelope"></i> {{professorProfile.contact.email}}</p>
+    <p><i class="fa-solid fa-phone"></i> {{professorProfile.contact.phone}}</p>
+    <p><i class="fa-solid fa-location-dot"></i> {{professorProfile.contact.location}}</p>
 
-    <!-- Left: Info -->
-    <!-- <div class="card profile-info">
-      <h4>Contact Info</h4>
-      <p><i class="fa-solid fa-envelope"></i> johndoe@university.edu</p>
-      <p><i class="fa-solid fa-phone"></i> (239) 816-9029</p>
-      <p><i class="fa-solid fa-location-dot"></i> Bay Area, San Francisco</p>
-      <button class="edit-btn">Edit Profile</button>
-    </div> -->
-    <div class="card profile-info">
-      <h4>Contact Info</h4>
-      <p><i class="fa-solid fa-user"></i> <strong>Full Name:</strong> John Doe</p>
-      <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> johndoe@university.edu</p>
-      <p><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> (239) 816-9029</p>
-      <p><i class="fa-solid fa-location-dot"></i> <strong>Address:</strong> Bay Area, San Francisco</p>
-      <button class="edit-btn">Edit Profile</button>
-
-      <h4>Social Links</h4>
-      <div class="social-links">
-        <a href="#"><i class="fa-solid fa-globe"></i> Website</a>
-        <a href="#"><i class="fa-brands fa-github"></i> GitHub</a>
-        <a href="#"><i class="fa-brands fa-twitter"></i> Twitter</a>
-        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      </div>
-    </div>
-
-    <!-- Right: Tabs -->
-    <div class="card profile-content">
-      <!-- Tabs -->
-      <div class="tabs">
-        <button [class.active]="activeTab === 'overview'" (click)="setTab('overview')">
-          <mat-icon>person</mat-icon> Overview
-        </button>
-        <button [class.active]="activeTab === 'courses'" (click)="setTab('courses')">
-          <mat-icon>book</mat-icon> Courses
-        </button>
-        <button [class.active]="activeTab === 'reviews'" (click)="setTab('reviews')">
-          <mat-icon>rate_review</mat-icon> Reviews
-        </button>
-      </div>
-
-      <!-- Tab Content -->
-      <div class="tab-content">
-        <div *ngIf="activeTab === 'overview'">
-          <h3>About Professor</h3>
-          <p>
-            Dr. John Smith is a passionate educator with 15+ years of teaching experience in
-            Computer Science fundamentals and AI.
-          </p>
-        </div>
-
-        <div *ngIf="activeTab === 'courses'">
-          <h3>Courses Taught</h3>
-          <ul>
-            <li>Computer Science Fundamentals (CS101)</li>
-            <li>Data Structures & Algorithms</li>
-          </ul>
-        </div>
-
-        <div *ngIf="activeTab === 'reviews'">
-          <h3>Student Reviews</h3>
-          <p>⭐️⭐️⭐️⭐️☆ (4.5 / 5)</p>
-          <p>"Great mentor and very approachable!"</p>
-        </div>
-      </div>
+    <!-- Social Links -->
+    <h4 class="mt-4"><i class="fa-solid fa-share-nodes"></i> Social Links</h4>
+    <div class="social-links">
+      <a *ngFor="let social of professorProfile.socials" [href]="social.url" target="_blank" class="social-btn">
+        <i class="{{social.icon}}"></i>
+      </a>
     </div>
   </div>
+</div>
+
+
+<div class="profile-tabs glass">
+  <div class="tabs">
+    <button [class.active]="activeTab === 'overview'" (click)="setTab('overview')">
+      <mat-icon>person</mat-icon> Overview
+    </button>
+    <button [class.active]="activeTab === 'courses'" (click)="setTab('courses')">
+      <mat-icon>book</mat-icon> Courses Taught
+    </button>
+    <button [class.active]="activeTab === 'research'" (click)="setTab('research')">
+      <mat-icon>science</mat-icon> Research
+    </button>
+    <button [class.active]="activeTab === 'reviews'" (click)="setTab('reviews')">
+      <mat-icon>rate_review</mat-icon>Student Reviews
+    </button>
+  </div>
+
+  <div class="tab-content">
+
+    <div *ngIf="activeTab === 'overview'" class="fade-in premium-overview">
+
+  <!-- About Section -->
+  <div class="info-card">
+    <div class="info-header">
+      <div class="icon-badge">
+        <i class="fa-solid fa-person-chalkboard"></i>
+      </div>
+      <h4>About Professor</h4>
+    </div>
+    <div class="info-content">
+      <p *ngFor="let about of professorProfile.overview.about">{{about}}</p>
+    </div>
+  </div>
+
+  <!-- Education Section -->
+  <div class="info-card ">
+    <div class="info-header">
+      <div class="icon-badge">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <h4>Education</h4>
+    </div>
+    <ul class="styled-list mt-2">
+      <li *ngFor="let edu of professorProfile.overview.education">
+        <i class="fa-solid fa-circle-check"></i> {{edu}}
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
+
+    <div *ngIf="activeTab === 'courses'" class="fade-in premium-courses">
+  <div *ngFor="let course of professorProfile.courses" class="course-card">
+    <div class="course-icon">
+      <i class="fa {{course.icon}}"></i>
+    </div>
+    <div class="course-info">
+      <h5>{{course.name}}</h5>
+    </div>
+  </div>
+</div>
+
+
+
+    <div *ngIf="activeTab === 'research'" class="fade-in premium-research">
+  <div *ngFor="let res of professorProfile.research; let i = index" class="research-card">
+    
+    <!-- Research Title + % -->
+    <div class="research-header">
+      <span class="research-name">{{res.name}}</span>
+      <span class="research-value">{{res.progress}}%</span>
+    </div>
+
+    <!-- Custom Progress Bar -->
+    <mat-progress-bar 
+      mode="determinate" 
+      [value]="res.progress" 
+      [ngClass]="'bar-' + i">
+    </mat-progress-bar>
+
+  </div>
+</div>
+
+
+
+
+
+    <div *ngIf="activeTab === 'reviews'" class="fade-in">
+  <div *ngFor="let review of professorProfile.reviews" class="review-card premium-review">
+    <img [src]="review.avatar" alt="student">
+    <div>
+      <!-- Star Rating -->
+      <div class="star-rating">
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <ng-container *ngIf="review.rating >= star">
+            <!-- Full Star -->
+            <svg class="star full" viewBox="0 0 24 24">
+              <path d="M12 .587l3.668 7.568L24 9.75l-6 5.915L19.335 24 12 19.897 4.665 24 6 15.665 0 9.75l8.332-1.595z"/>
+            </svg>
+          </ng-container>
+          <ng-container *ngIf="review.rating >= star - 0.5 && review.rating < star">
+            <!-- Half Star -->
+            <svg class="star half" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="halfGrad">
+                  <stop offset="50%" stop-color="#f5b301"/>
+                  <stop offset="50%" stop-color="#ddd"/>
+                </linearGradient>
+              </defs>
+              <path d="M12 .587l3.668 7.568L24 9.75l-6 5.915L19.335 24 12 19.897 4.665 24 6 15.665 0 9.75l8.332-1.595z" fill="url(#halfGrad)"/>
+            </svg>
+          </ng-container>
+          <ng-container *ngIf="review.rating < star - 0.5">
+            <!-- Empty Star -->
+            <svg class="star empty" viewBox="0 0 24 24">
+              <path d="M12 .587l3.668 7.568L24 9.75l-6 5.915L19.335 24 12 19.897 4.665 24 6 15.665 0 9.75l8.332-1.595z"/>
+            </svg>
+          </ng-container>
+        </ng-container>
+        <span class="rating-text">({{review.rating}} / 5)</span>
+      </div>
+
+      <!-- Review Comment -->
+      <blockquote>"{{review.comment}}"</blockquote>
+      <small>- {{review.student}}</small>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+
 </div>

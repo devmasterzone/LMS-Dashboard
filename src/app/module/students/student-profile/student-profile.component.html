@@ -1,103 +1,103 @@
+<app-breadcrumb [pageTitle]="pageTitle" [breadcrumbs]="breadcrumbs"></app-breadcrumb>
 <div class="page-wrapper">
   <div class="card profile-card">
     <!-- Header -->
     <div class="profile-header d-flex align-items-center gap-3">
-      <img [src]="student.photo" alt="Student Photo" class="profile-img" />
+      <img [src]="student.photo" alt="Student Photo" class="profile-img shadow" />
       <div>
-        <h3>{{ student.name }}</h3>
-        <p class="text-muted mb-0">Roll No: {{ student.rollNo }}</p>
-        <p class="text-muted mb-0">{{ student.course }} ({{ student.year }})</p>
+        <h3 class="mb-1 fw-bold text-primary">{{ student.name }}</h3>
+        <p class="text-muted small mb-1">🎓 Roll No: {{ student.rollNo }}</p>
+        <p class="text-muted small mb-0">{{ student.course }} ({{ student.year }})</p>
       </div>
     </div>
 
     <!-- Tabs -->
-    <ul class="nav nav-tabs mt-3">
-      <li class="nav-item">
-        <button class="nav-link" [class.active]="activeTab==='overview'" (click)="setTab('overview')">
-          Overview
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" [class.active]="activeTab==='courses'" (click)="setTab('courses')">
-          Courses
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" [class.active]="activeTab==='attendance'" (click)="setTab('attendance')">
-          Attendance
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="nav-link" [class.active]="activeTab==='contact'" (click)="setTab('contact')">
-          Contact
+    <ul class="nav nav-tabs mt-3 custom-tabs">
+      <li class="nav-item" *ngFor="let tab of ['overview','courses','attendance','contact']">
+        <button 
+          class="nav-link" 
+          [class.active]="activeTab===tab" 
+          (click)="setTab(tab)">
+          {{ tab | titlecase }}
         </button>
       </li>
     </ul>
 
     <!-- Tab Content -->
-    <div class="tab-content p-3">
+    <div class="tab-content p-4">
       <!-- Overview -->
       <div *ngIf="activeTab==='overview'">
-        <h5>Basic Information</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>Date of Birth:</strong> {{ student.dob }}</li>
-          <li class="list-group-item"><strong>Roll No:</strong> {{ student.rollNo }}</li>
-          <li class="list-group-item"><strong>Course:</strong> {{ student.course }}</li>
-          <li class="list-group-item"><strong>Year:</strong> {{ student.year }}</li>
+        <h5 class="section-title">Basic Information</h5>
+        <ul class="list-group list-group-flush info-list">
+          <li class="list-group-item"><span>Date of Birth:</span> {{ student.dob }}</li>
+          <li class="list-group-item"><span>Roll No:</span> {{ student.rollNo }}</li>
+          <li class="list-group-item"><span>Course:</span> {{ student.course }}</li>
+          <li class="list-group-item"><span>Year:</span> {{ student.year }}</li>
         </ul>
       </div>
 
       <!-- Courses -->
       <div *ngIf="activeTab==='courses'">
-        <h5>Enrolled Courses</h5>
-        <table class="table table-bordered mt-2">
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Course Name</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let c of student.courses">
-              <td>{{ c.code }}</td>
-              <td>{{ c.name }}</td>
-              <td>{{ c.grade }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <h5 class="section-title">Enrolled Courses</h5>
+        <div class="table-responsive">
+          <table class="table custom-table mt-2">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Course Name</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of student.courses">
+                <td>{{ c.code }}</td>
+                <td>{{ c.name }}</td>
+                <td><span class="badge bg-success px-3 py-2">{{ c.grade }}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Attendance -->
       <div *ngIf="activeTab==='attendance'">
-        <h5>Attendance</h5>
-        <table class="table table-bordered mt-2">
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Attended</th>
-              <th>Total</th>
-              <th>%</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let a of student.attendance">
-              <td>{{ a.subject }}</td>
-              <td>{{ a.attended }}</td>
-              <td>{{ a.total }}</td>
-              <td>{{ getAttendancePercent(a.attended, a.total) }}%</td>
-            </tr>
-          </tbody>
-        </table>
+        <h5 class="section-title">Attendance</h5>
+        <div class="table-responsive">
+          <table class="table custom-table mt-2">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Attended</th>
+                <th>Total</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let a of student.attendance">
+                <td>{{ a.subject }}</td>
+                <td>{{ a.attended }}</td>
+                <td>{{ a.total }}</td>
+                <td>
+                <span 
+                  class="badge" 
+                  [ngClass]="getAttendancePercent(a.attended,a.total) >= 75 ? 'bg-success' : 'bg-danger'">
+                  {{ getAttendancePercent(a.attended, a.total) }}%
+                </span>
+              </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Contact -->
       <div *ngIf="activeTab==='contact'">
-        <h5>Contact Information</h5>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>Email:</strong> {{ student.email }}</li>
-          <li class="list-group-item"><strong>Phone:</strong> {{ student.phone }}</li>
-          <li class="list-group-item"><strong>Address:</strong> {{ student.address }}</li>
+        <h5 class="section-title">Contact Information</h5>
+        <ul class="list-group list-group-flush info-list">
+          <li class="list-group-item"><span>Email:</span> {{ student.email }}</li>
+          <li class="list-group-item"><span>Phone:</span> {{ student.phone }}</li>
+          <li class="list-group-item"><span>Address:</span> {{ student.address }}</li>
         </ul>
       </div>
     </div>
