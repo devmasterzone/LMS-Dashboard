@@ -1,59 +1,28 @@
-# Dashboard
+# LMS-Admin-Teacher-Student
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.1.
+> Lightweight Learning Management System (LMS) — Admin & Student modules, built with Angular + Node.js tooling.  
+> This repo contains frontend UI and admin/student flows (dashboards, CRUD, file uploads, document review workflows, role-based auth).
 
-## Development server
+## Features
+- Admin & Student modules with role-based navigation
+- Dashboard (light/dark), responsive layout
+- CRUD pages for Courses, Professors, Students
+- Document upload & review workflow (file preview, reviewer/approver assignment)
+- Angular + Tailwind / Angular Material friendly structure
+- Ready for integration with REST API backend
 
-To start a local development server, run:
+## Tech stack
+- Frontend: Angular (TypeScript), Angular Material, Tailwind CSS (optional)
+- Backend: Node.js / Express (separate service)
+- Build tools: Angular CLI, npm
 
-```bash
-ng serve
-```
+## Prerequisites
+- Node.js (>= 18)
+- npm (>= 9)
+- Angular CLI (optional but recommended): `npm i -g @angular/cli`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Quick start (frontend)
+1. Clone the repo:
+   ```bash
+   git clone <your-repo-url>
+   cd <repo-folder>
