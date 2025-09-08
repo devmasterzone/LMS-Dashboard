@@ -4,13 +4,11 @@
   border-radius: 0.75rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
   h4 {
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--primary); // Blue-600
   }
-
   .breadcrumb {
     display: flex;
     flex-wrap: wrap;
@@ -24,25 +22,14 @@
       align-items: center;
       color: var(--breadcumb-color);
       position: relative;
-
-      // &::after {
-      //   content: "›";
-      //   margin: 0 0.6rem;
-      //   color: #b0b0b0;
-      // }
-
       &:last-child::after {
         content: none;
       }
-
       &.active .breadcrumb-current {
         font-weight: 600;
         color: var(--breadcumb-active-color);
-        // background: #e0f2fe;
         padding: 0.25rem 0;
-        // border-radius: 9999px;
       }
-
       a.breadcrumb-link {
         color: #6c757d;
         text-decoration: none;
